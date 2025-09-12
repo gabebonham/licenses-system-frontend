@@ -1,0 +1,13 @@
+http {
+    server {
+        listen 80;
+        server_name example.com www.example.com;
+
+        root /services/licenses-system/frontend/not-deployed;
+        index index.html index.htm; 
+
+        location / {
+            try_files $uri $uri/ =404;
+        }
+    }
+}
