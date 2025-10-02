@@ -1,16 +1,20 @@
-import { Volleyball } from 'lucide-react'
+import { Bot, Volleyball } from 'lucide-react'
 import HomeSubMenu from './HomeSubMenu'
 import MenuDrawerButton from '@/app/home/components/MenuDrawerButton'
+import Link from 'next/link'
 
-export default function HomeHeader() {
+export default function HomeHeader({ token }: { token: any }) {
   return (
-    <header className="fixed w-full z-90 backdrop-blur-2xl ">
-      <div className="w-full items-center flex justify-between border-b-2 bg-gradient-to-b from-black/20 to-primary border-b-white/90 h-18 px-4 bg-primary/60 ">
-        <div>
-          <Volleyball />
-        </div>
-        <div>
-          <MenuDrawerButton />
+    <header className="fixed w-full z-90  bg-background ">
+      <div className="w-full items-center px-4 flex justify-between border-b-2  backdrop-blur-2xl   h-18 lg:pl-24 lg:pr-12  ">
+        <Link href={'/home'} className="flex items-center gap-x-4 ">
+          <Bot className="text-blueLight" />
+          <h1 className="lg:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blueLight to-white/70">
+            H4Investimentos
+          </h1>
+        </Link>
+        <div className="flex">
+          <MenuDrawerButton token={token} />
         </div>
       </div>
     </header>

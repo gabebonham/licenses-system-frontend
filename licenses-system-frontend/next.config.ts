@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
       'images.unsplash.com',
       'images.contentstack.io',
       'downloadserver-cdn.nelogica.com.br',
+      'localhost',
     ],
   },
 }
