@@ -12,7 +12,7 @@ export default async function AuthLayout({
   const token = cookieStore.get('token')
   if (token) {
     const tokenObj = await decodeJwt(token.value)
-    if (tokenObj.role == 'admin') {
+    if (tokenObj!.role == 'admin') {
       redirect('/admin/dashboard')
     } else {
       redirect('/users/dashboard')

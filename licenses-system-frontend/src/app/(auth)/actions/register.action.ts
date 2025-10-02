@@ -20,7 +20,7 @@ export async function register(formData: FormData) {
       throw new Error('Senhas diferentes')
     }
     const res = await apiPublic
-      .post('/register', { name, email, password, role: 'admin' })
+      .post('/register', { name, email, password, role: 'user' })
       .then((r) => r.data)
     return { success: true }
   } catch (e) {

@@ -9,7 +9,7 @@ import { cookies } from 'next/headers'
 export default async function TabsComponent() {
   const cookieStore = await cookies()
   const token = await decodeJwt(cookieStore.get('token')?.value as string)
-  const user = await getUserById(token.id)
+  const user = await getUserById(token!.id)
   return (
     <Tabs
       defaultValue="bots"

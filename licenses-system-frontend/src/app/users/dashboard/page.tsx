@@ -10,7 +10,7 @@ export default async function UsersDashboard() {
   const cookieStore = await cookies()
 
   const token = await decodeJwt(cookieStore.get('token')?.value as string)
-  const user = await getUserById(token.id)
+  const user = await getUserById(token!.id)
   return (
     <div className=" text-blueLight  ">
       <div className="lg:px-12 lg:pt-32 px-4 pt-24 space-y-12 pb-12 bg-foreground w-full">

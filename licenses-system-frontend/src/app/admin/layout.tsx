@@ -16,7 +16,7 @@ export default async function AdminLayout({
     redirect('/login')
   }
   const tokenObj = await decodeJwt(token.value)
-  if (tokenObj.role != 'admin') {
+  if (tokenObj!.role != 'admin') {
     redirect('/users/dashboard')
   }
   return (
