@@ -2,9 +2,12 @@
 
 import { apiPublic } from '@/lib/api'
 import { logger } from '@/lib/log.logger'
+import { login } from './login.action'
+import { cookies } from 'next/headers'
 
 export async function register(formData: FormData) {
   try {
+    const cookieStore = await cookies()
     const log = await logger()
     const email = formData.get('email') as string
     const password = formData.get('password') as string
@@ -22,6 +25,7 @@ export async function register(formData: FormData) {
     const res = await apiPublic
       .post('/register', { name, email, password, role: 'user' })
       .then((r) => r.data)
+    cookieStore.set('token', res.token)
     return { success: true }
   } catch (e) {
     return { success: false, error: e instanceof Error ? e.message : String(e) }
