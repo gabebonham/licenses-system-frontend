@@ -69,6 +69,7 @@ export default async function TabsComponent() {
       <TabsContent value="licenses" className="w-full ">
         <LicensesDataTable
           licenses={dataLicenses.success ? dataLicenses.data : []}
+          users={data.success ? data.data : []}
         />
       </TabsContent>
     </Tabs>

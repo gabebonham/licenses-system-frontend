@@ -46,84 +46,113 @@ import {
 } from '@/app/admin/actions/licences.service'
 import CreateLicenseModalButton from '@/app/admin/components/CreateLicenseModalButton'
 import { toast } from 'sonner'
+import { User } from '@/entities/user.entity'
 
-export const columns: ColumnDef<License>[] = [
-  {
-    accessorKey: 'id',
-    header: 'id',
-    cell: ({ row }) => <div className=" ">{row.getValue('id')}</div>,
-  },
-  {
-    accessorKey: 'productId',
-    header: 'Id do Produto',
-    cell: ({ row }) => <div className=" ">{row.getValue('productId')}</div>,
-  },
-  {
-    accessorKey: 'userId',
-    header: 'Id do Usuário',
-    cell: ({ row }) => <div className=" ">{row.getValue('userId')}</div>,
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ row }) => (
-      <div
-        className={
-          row.original.status == 'Ativo' ? 'text-green-500' : 'text-red-500'
-        }
-      >
-        {row.getValue('status')}
-      </div>
-    ),
-  },
-  {
-    id: 'statusToggle',
-    accessorKey: 'statusToggle',
-    header: 'Alterar Status',
-    cell: ({ row }) => {
-      const license = row.original
-
-      return (
-        <CustomButton
-          color="Action"
-          css={`
-            ${license.status == 'Inativo' && 'bg-red-400'}
-          `}
-          label={license.status == 'Ativo' ? 'Desativar' : 'Ativar'}
-          action={() => {
-            toggleLicenseStatus(
-              license.id,
-              license.status == 'Ativo' ? 'Inativo' : 'Ativo',
-            )
-            toast('Atualize a página')
-          }}
-        />
-      )
+function getColumns(users: User[]) {
+  const columns: ColumnDef<License>[] = [
+    {
+      accessorKey: 'id',
+      header: 'id',
+      cell: ({ row }) => <div className=" ">{row.getValue('id')}</div>,
     },
-  },
-  {
-    id: 'deleteAction',
-    accessorKey: 'deleteAction',
-    header: 'Deletar',
-    cell: ({ row }) => {
-      const license = row.original
-
-      return (
-        <CustomButton
-          color="Option"
-          label="Deletar Licença"
-          action={() => {
-            deleteLicense(license.id)
-
-            toast('Atualize a página')
-          }}
-        />
-      )
+    {
+      accessorKey: 'productId',
+      header: 'Id do Produto',
+      cell: ({ row }) => <div className=" ">{row.getValue('productId')}</div>,
     },
-  },
-]
+    {
+      accessorKey: 'userId',
+      header: 'Id do Usuário',
+      cell: ({ row }) => <div className=" ">{row.getValue('userId')}</div>,
+    },
+    {
+      accessorKey: 'userName',
+      header: 'Usuário',
+      cell: ({ row }) => (
+        <div className=" ">
+          {users.find((user) => row.getValue('userId') == user.id)?.name}
+        </div>
+      ),
+    },
+    {
+      accessorKey: 'userEmail',
+      header: 'Email do Usuário',
+      cell: ({ row }) => (
+        <div className=" ">
+          {users.find((user) => row.getValue('userId') == user.id)?.email}
+        </div>
+      ),
+    },
+    {
+      accessorKey: 'status',
+      header: 'Status',
+      cell: ({ row }) => (
+        <div
+          className={
+            row.original.status == 'Ativo' ? 'text-green-500' : 'text-red-500'
+          }
+        >
+          {row.getValue('status')}
+        </div>
+      ),
+    },
+    {
+      id: 'statusToggle',
+      accessorKey: 'statusToggle',
+      header: 'Alterar Status',
+      cell: ({ row }) => {
+        const license = row.original
 
-export function LicensesDataTable({ licenses }: { licenses: License[] }) {
+        return (
+          <CustomButton
+            color="Action"
+            css={`
+              ${license.status == 'Inativo' && 'bg-red-400'}
+            `}
+            label={license.status == 'Ativo' ? 'Desativar' : 'Ativar'}
+            action={() => {
+              toggleLicenseStatus(
+                license.id,
+                license.status == 'Ativo' ? 'Inativo' : 'Ativo',
+              )
+              toast('Atualize a página')
+            }}
+          />
+        )
+      },
+    },
+    {
+      id: 'deleteAction',
+      accessorKey: 'deleteAction',
+      header: 'Deletar',
+      cell: ({ row }) => {
+        const license = row.original
+
+        return (
+          <CustomButton
+            color="Option"
+            label="Deletar Licença"
+            action={() => {
+              deleteLicense(license.id)
+
+              toast('Atualize a página')
+            }}
+          />
+        )
+      },
+    },
+  ]
+  return columns
+}
+
+export function LicensesDataTable({
+  licenses,
+  users,
+}: {
+  licenses: License[]
+  users: User[]
+}) {
+  const columns = getColumns(users)
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],

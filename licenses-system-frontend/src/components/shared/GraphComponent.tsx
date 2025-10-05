@@ -59,8 +59,7 @@ export function generateMockTrades(count = 500): Trade[] {
 
 export default function GraphComponent({ trades }: Props) {
   // Sort trades by time
-  const bundas = generateMockTrades(500)
-  const sorted = [...bundas].sort((a, b) => a.time - b.time)
+  const sorted = [...trades].sort((a, b) => a.time - b.time)
   // Build cumulative profit
   let cumulative = 0
   const equityData = sorted.map((t, index) => {
