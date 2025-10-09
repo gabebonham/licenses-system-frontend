@@ -6,8 +6,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Bot } from 'lucide-react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 export default function ForgotPasswordPage() {
+  const searchParams = useSearchParams();
+  const lastLink = searchParams.get('lastLink');
   return (
     <section className="text-blueLight   w-full  flex flex-col items-center">
       <div className="min-lg:w-2/5 min-lg:items-center min-md:px-12 min-md:items-start w-full px-6 py-6 flex flex-col items-center min-md:w-3/6">
@@ -23,7 +26,7 @@ export default function ForgotPasswordPage() {
               </p>
               <p className="lg:pt-4 lg:text-xl text-blueLight/60">
                 Não tem uma conta?{' '}
-                <Link className="text-blueLight" href={'/register'}>
+                <Link className="text-blueLight" href={`/register${lastLink?`?lastLink=${lastLink}`:''}`}>
                   Clique Aqui
                 </Link>
               </p>
@@ -49,7 +52,7 @@ export default function ForgotPasswordPage() {
                 css="lg:text-xl lg:py-6"
               />
               Já tem uma conta?{' '}
-              <Link className="text-blueLight" href={'/login'}>
+              <Link className="text-blueLight" href={`/login${lastLink?`?lastLink=${lastLink}`:''}`}>
                 Clique aqui
               </Link>
             </div>

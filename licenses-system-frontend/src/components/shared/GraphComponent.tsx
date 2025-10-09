@@ -66,27 +66,26 @@ export default function GraphComponent({ trades }: Props) {
     cumulative += t.profit
     return {
       trade: `#${index + 1}`,
-      acumulativo: cumulative,
+      resultado: cumulative,
       profit: t.profit,
       symbol: t.symbol,
     }
   })
 
   return (
-    <div className="flex w-full flex-col gap-12">
+    <div className="flex w-full flex-col items-center ">
       <div className="w-full">
         <h2 className="text-xl font-semibold mb-2">Curva De Capital</h2>
-        <ResponsiveContainer width="100%" height={500}>
-          <LineChart data={equityData}>
-            <CartesianGrid strokeDasharray="3 3" />
+        <ResponsiveContainer width="100%" height={500} className={''}>
+          <LineChart data={equityData} className=''  margin={{ top: 0, right: 40, bottom: 0, left: -20 }} >
+            <CartesianGrid strokeDasharray="3 3"     />
             <XAxis dataKey="trade" />
             <YAxis />
             <Tooltip />
-            <Legend />
             <Line
               activeDot={false}
               type="monotone"
-              dataKey="acumulativo"
+              dataKey="resultado"
               stroke="#4bc0c0"
             />
           </LineChart>

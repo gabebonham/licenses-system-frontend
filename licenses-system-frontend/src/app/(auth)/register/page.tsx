@@ -9,18 +9,29 @@ import { Bot } from 'lucide-react'
 import Link from 'next/link'
 import { register } from '../actions/register.action'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function RegisterPage() {
   const router = useRouter()
+  const searchParams = useSearchParams();
+  const lastLink = searchParams.get('lastLink');
   const [error, setError] = useState<string | undefined>()
   const handleRegister = async (formData: FormData) => {
     const result = (await register(formData)) as any
+    const link = lastLink
     if (!result.success) {
       setError(result.error)
     } else {
       setError(undefined)
-      router.push('/users/dashboard')
+      if (link){
+        console.log(link)
+        router.push(link)
+        return
+      } else {
+
+        router.push('/users/dashboard')
+        return
+      }
     }
   }
   return (
@@ -48,7 +59,7 @@ export default function RegisterPage() {
               </p>
               <p className="lg:pt-4 lg:text-xl text-blueLight/60">
                 Já tem uma conta?{' '}
-                <Link className="text-blueLight" href={'/login'}>
+                <Link className="text-blueLight" href={`/login${lastLink?`?lastLink=${lastLink}`:''}`}>
                   Clique Aqui
                 </Link>
               </p>
@@ -107,7 +118,7 @@ export default function RegisterPage() {
               Esqueceu a senha?{' '}
               <Link
                 className="text-blueLight lg:text-xl"
-                href={'/forgot-password'}
+                href={`/forgot-password${lastLink?`?lastLink=${lastLink}`:''}`}
               >
                 Clique aqui
               </Link>

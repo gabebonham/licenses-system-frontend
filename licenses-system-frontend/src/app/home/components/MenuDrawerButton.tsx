@@ -44,6 +44,7 @@ export default function MenuDrawerButton({ token }: { token: any }) {
         <div className="w-full flex flex-col px-4 gap-y-8 py-8">
           {items.map((item) => (
             <Card
+            key={item.name}
               onClick={() => handleScroll(item.link)}
               className="cursor-pointer border-white/10 text-blueLight px-4 bg-gradient-to-br to-foreground from-secondary"
             >

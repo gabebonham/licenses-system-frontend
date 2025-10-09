@@ -46,7 +46,7 @@ export default function ViewProducts({
     <section className="flex flex-col w-full bg-gradient-to-b from-/60 to-secondary/30 lg:pb-20 lg:px-24">
       <div className="lg:pb-12 py-6 lg:gap-x-12 lg:justify-center lg:items-start lg:flex-row flex flex-col w-full place-items-center gap-y-12">
         {experts.length >= 1 && (
-          <Card className="px-6 hover:shadow-[0_0_25px_0_#a7e6ff] transition-all flex flex-col justify-between min-h-[504px] text-blueLight/80 bg-gradient-to-br from-secondary to-primary border-1 border-blueLight/30 lg:w-2/3">
+          <Card className="px-6 hover:shadow-[0_0_25px_0_#a7e6ff] transition-all flex flex-col justify-between min-h-[504px] text-blueLight/80 bg-gradient-to-br from-secondary to-primary border-1 border-blueLight/30 w-11/12">
             <div className="flex items-center w-full justify-between">
               <Lightbulb className="bg-primary p-3 rounded-xl box-content size-10" />
               <div className="w-fit">

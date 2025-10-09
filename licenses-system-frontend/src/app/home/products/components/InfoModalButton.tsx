@@ -1,28 +1,17 @@
 'use client'
 
 import CustomButton from '@/components/shared/buttons/CustomButton'
-import { Button } from '@/components/ui/button'
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import Image from 'next/image'
-import grapMock from '@/../public/images/mockGraph.png'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Badge } from '@/components/ui/badge'
 import React, { useState } from 'react'
 import ProductCarousel from '../../components/ProductCarousel'
-import { Product } from '@/entities/product.entity'
-import { previousDay } from 'date-fns'
-import { useRouter } from 'next/navigation'
 import GraphComponent from '@/components/shared/GraphComponent'
 import { Expert } from '@/entities/expert.entity'
+import { isLogged } from '@/lib/logged'
 
 export default function InfoModalButton({
   performanceReport,
@@ -38,12 +27,13 @@ export default function InfoModalButton({
   const [targetButton, setTargetButton] = useState<undefined | number>()
   const [targetTimeButton, setTargetTimeButton] = useState<undefined | number>()
   const [link, setLink] = useState<string | undefined>()
+  const logged = isLogged()
   return (
     <Dialog>
       <DialogTrigger className="w-full">{btn}</DialogTrigger>
       <DialogContent className=" h-9/12  min-w-11/12 w-full p-2 lg:p-6 z-90   ">
         <ScrollArea className="lg:flex-row  min-h-8/12 h-full  w-full flex flex-col items-center">
-          <div className="text-blueLight  lg:flex-row h-full   lg:max-w-full w-full flex flex-col items-center lg:items-start gap-y-3">
+          <div className="text-blueLight  lg:flex-row h-full   lg:max-w-full w-full flex flex-col items-center justify-center lg:items-start gap-y-3">
             <GraphComponent
               trades={trades.filter(
                 (trade: any) => trade.magic == expert?.magicNumber,
@@ -103,13 +93,22 @@ export default function InfoModalButton({
                   )}
                 </div>
               </div>
+              {logged?
               <CustomButton
                 label="Comprar"
                 inactive={link != undefined}
                 css="lg:text-2xl lg:py-8 rounded-2xl"
                 color="Action"
                 href={link}
-              />
+              />:
+            <CustomButton
+                label="Comprar"
+                inactive={link != undefined}
+                css="lg:text-2xl lg:py-8 rounded-2xl"
+                color="Action"
+                href={`/login?lastLink=${link}`}
+              />}
+              {!logged&&<h1 className='text-red-400 text-sm'>Obs: Você será redirecionado para o login antes</h1>}
             </div>
           </div>
         </ScrollArea>

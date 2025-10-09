@@ -9,10 +9,12 @@ import { login } from '../actions/login.action'
 import { useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Bot } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function LoginPage() {
   const router = useRouter()
+  const searchParams = useSearchParams();
+  const lastLink = searchParams.get('lastLink');
   const [error, setError] = useState<string | undefined>()
   const handleLogin = async (formData: FormData) => {
     const result = (await login(formData)) as any
@@ -20,6 +22,10 @@ export default function LoginPage() {
       setError(result.error)
     } else {
       setError(undefined)
+      if (lastLink){
+        router.push(lastLink)
+        return
+      }
       result.admin
         ? router.push('/admin/dashboard')
         : router.push('/users/dashboard')
@@ -47,7 +53,7 @@ export default function LoginPage() {
               </p>
               <p className="lg:pt-4 lg:text-xl text-blueLight/60">
                 Não tem uma conta?{' '}
-                <Link className="text-blueLight" href={'/register'}>
+                <Link className="text-blueLight" href={`/register${lastLink?`?lastLink=${lastLink}`:''}`}>
                   Clique Aqui
                 </Link>
               </p>
@@ -85,7 +91,7 @@ export default function LoginPage() {
               Esqueceu a senha?{' '}
               <Link
                 className="text-blueLight lg:text-xl"
-                href={'/forgot-password'}
+                href={`/forgot-password${lastLink?`?lastLink=${lastLink}`:''}`}
               >
                 Clique aqui
               </Link>
