@@ -1,3 +1,4 @@
+'use client'
 import CustomButton from '@/components/shared/buttons/CustomButton'
 import CustomInput from '@/components/shared/inputs/CustomInput'
 import { Button } from '@/components/ui/button'
