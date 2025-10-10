@@ -36,7 +36,13 @@ export async function editUser(
   accountNumber?: number,
 ) {
   try {
-    const data = { name, email, accountNumber }
+    console.log(accountNumber)
+    console.log(name)
+    const data: any = {}
+    if (name !== undefined) data.Name = name
+    if (email !== undefined) data.Email = email
+    if (accountNumber) data.AccountNumber = Number(accountNumber)
+
     const res = await api.patch('/user/' + id, data).then((r) => r.data)
   } catch (e) {
     console.log(e)
