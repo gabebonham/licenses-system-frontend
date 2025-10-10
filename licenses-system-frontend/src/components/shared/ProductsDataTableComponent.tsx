@@ -48,30 +48,7 @@ import { toast } from 'sonner'
 
 export function createColumns(users: User[]) {
   const columns: ColumnDef<Product>[] = [
-    {
-      id: 'select',
-      header: ({ table }) => (
-        <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && 'indeterminate')
-          }
-          className="text-blueLight/70"
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          className="text-blueLight/70"
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
-    },
+    
 
     {
       accessorKey: 'id',
@@ -219,7 +196,7 @@ export function ProductsDataTable({
     <div className="w-full text-blueLight  ">
       <div className="flex items-center py-4 gap-x-4 justify-around">
         <Input
-          placeholder="Filter emails..."
+          placeholder="Filter nome..."
           value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
             table.getColumn('name')?.setFilterValue(event.target.value)

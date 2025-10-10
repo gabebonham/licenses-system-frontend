@@ -19,7 +19,7 @@ interface Props {
 export default function CustomInput(props: Props) {
   const btnRef = useRef<HTMLButtonElement | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const [flag, toggle] = useState<boolean>(true)
+  const [flag, toggle] = useState<boolean>(false)
   let IconComponent
   const clickHandler = () => {
     fileInputRef.current?.click()

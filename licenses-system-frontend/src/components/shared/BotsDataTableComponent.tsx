@@ -191,7 +191,7 @@ export function BotsDataTable({ experts }: { experts: Expert[] }) {
     <div className="w-full text-blueLight  ">
       <div className="flex items-center py-4 gap-x-4 justify-around">
         <Input
-          placeholder="Filter emails..."
+          placeholder="Filter nome..."
           value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
             table.getColumn('name')?.setFilterValue(event.target.value)

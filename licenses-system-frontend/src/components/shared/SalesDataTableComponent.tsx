@@ -72,46 +72,10 @@ export function createColumns() {
     {
       accessorKey: 'expiration',
       header: 'Expiração',
-      cell: ({ row }) => <div className=" ">{row.getValue('expiration')}</div>,
+      cell: ({ row }) => <div className=" ">{new Date(row.getValue('expiration')).toLocaleDateString('pt-BR')}</div>,
     },
 
-    {
-      id: 'actions',
-      accessorKey: 'actions',
-      header: 'Ações',
-      enableHiding: false,
-      cell: ({ row }) => {
-        const payment = row.original
-
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0 cursor-pointer">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="size-6" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="bg-foreground text-blueLight lg:text-xl border-white/30 "
-            >
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuSeparator className="bg-white/30" />
-              <DropdownMenuItem
-                onClick={() => {
-                  deleteProduct(row.getValue('id'))
-
-                  toast('Atualize a página')
-                }}
-                className="text-red-500"
-              >
-                Excluir Produto
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )
-      },
-    },
+    
   ]
   return columns
 }
@@ -148,10 +112,10 @@ export function SalesDataTable({ sales }: { sales: Sale[] }) {
     <div className="w-full text-blueLight  ">
       <div className="flex items-center py-4 gap-x-4 justify-around">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+          placeholder="Filter status..."
+          value={(table.getColumn('status')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
-            table.getColumn('name')?.setFilterValue(event.target.value)
+            table.getColumn('status')?.setFilterValue(event.target.value)
           }
           className="max-w-sm border-white/30 lg:text-xl lg:h-12"
         />

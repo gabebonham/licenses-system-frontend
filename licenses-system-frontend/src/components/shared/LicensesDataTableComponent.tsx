@@ -183,14 +183,7 @@ export function LicensesDataTable({
   return (
     <div className="w-full text-blueLight  ">
       <div className="flex items-center py-4 gap-x-4 justify-around">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('email')?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm border-white/30 lg:text-xl lg:h-12"
-        />
+        
         <div className="lg:block hidden">
           <CreateLicenseModalButton
             btn={

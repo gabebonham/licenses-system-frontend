@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import InfoModalButton from '../products/components/InfoModalButton'
 import { Product } from '@/entities/product.entity'
 import { Expert } from '@/entities/expert.entity'
+import { ScrollArea } from '@/components/ui/scroll-area'
 export default function ViewProducts({
   experts,
   trades,
@@ -65,24 +66,23 @@ export default function ViewProducts({
                   <></>
                 )}
               </div>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-blueLight py-2">
+            </div> <h1 className="text-xl font-bold text-blueLight ">
                 {theseExperts[0].name}
-              </h1>{' '}
+              </h1>
+            <ScrollArea className='h-26 overflow-y-auto'>
+             
               {theseExperts[0].description}
-            </div>
+            </ScrollArea>
             <div className="w-full flex items-center justify-between text-blueLight">
               {/* Nível de Risco:
               <Badge className="rounded-2xl bg-transprent text-blueLight border-white/20">
                 Baixo
               </Badge> */}
-            </div>
-            <div>
-              <h1 className="font-bold text-blueLight pb-4">
-                {' '}
+            </div><h1 className="font-bold text-blueLight ">
                 Características:
               </h1>
+            <ScrollArea className='h-26 overflow-y-auto'>
+              
               <div className="space-y-2">
                 {theseExperts[0].caracteristics.split(',').map((car) => (
                   <p className="flex items-center">
@@ -90,7 +90,7 @@ export default function ViewProducts({
                   </p>
                 ))}
               </div>
-            </div>
+            </ScrollArea>
             <div>
               <InfoModalButton
                 btn={
@@ -127,24 +127,23 @@ export default function ViewProducts({
                   <></>
                 )}
               </div>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-blueLight py-2">
+            </div><h1 className="text-xl font-bold text-blueLight ">
                 {theseExperts[1].name}
-              </h1>{' '}
+              </h1>
+            <ScrollArea className='h-28 overflow-y-auto'>
+              
               {theseExperts[1].description}
-            </div>
+            </ScrollArea>
             <div className="w-full flex items-center justify-between text-blueLight">
               {/* Nível de Risco:
               <Badge className="rounded-2xl bg-transprent text-blueLight border-white/20">
                 Baixo
               </Badge> */}
-            </div>
-            <div>
-              <h1 className="font-bold text-blueLight pb-4">
-                {' '}
+            </div><h1 className="font-bold text-blueLight ">
                 Características:
               </h1>
+            <ScrollArea className='h-24 overflow-y-auto'>
+              
               <div className="space-y-2">
                 {theseExperts[1].caracteristics.split(',').map((car) => (
                   <p className="flex items-center">
@@ -152,7 +151,7 @@ export default function ViewProducts({
                   </p>
                 ))}
               </div>
-            </div>
+            </ScrollArea>
             <div>
               <InfoModalButton
                 btn={
@@ -195,24 +194,22 @@ export default function ViewProducts({
                     <></>
                   )}
                 </div>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-blueLight py-2">
+              </div><h1 className="text-xl font-bold text-blueLight py-2">
                   {currentExpert.name}
-                </h1>{' '}
+                </h1>
+              <ScrollArea className='h-28 overflow-y-auto'>
                 {currentExpert.description}
-              </div>
+              </ScrollArea>
               <div className="w-full flex items-center justify-between text-blueLight">
                 {/* Nível de Risco:
                 <Badge className="rounded-2xl bg-transprent text-blueLight border-white/20">
                   Baixo
                 </Badge> */}
-              </div>
-              <div>
-                <h1 className="font-bold text-blueLight pb-4">
-                  {' '}
+              </div><h1 className="font-bold text-blueLight pb-4">
                   Características:
                 </h1>
+              <ScrollArea className='h-28 overflow-y-auto'>
+                
                 <div className="space-y-2">
                   {currentExpert.caracteristics.split(',').map((car) => (
                     <p key={car} className="flex items-center">
@@ -220,7 +217,7 @@ export default function ViewProducts({
                     </p>
                   ))}
                 </div>
-              </div>
+              </ScrollArea>
               <div>
                 <InfoModalButton
                   btn={
