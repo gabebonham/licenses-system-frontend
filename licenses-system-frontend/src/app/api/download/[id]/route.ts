@@ -4,8 +4,9 @@ import { Expert } from "@/entities/expert.entity";
 import { api } from "@/lib/api";
 import { NextRequest, NextResponse } from 'next/server'; // Assuming Next.js, adjust imports as needed
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = params; // Extract the entity ID from the URL
+export async function POST(request: NextRequest, { params }: { params:Promise<{ id: string; }> }) {
+  const resolvedParams =  params; // Await the promise
+  const { id } = await resolvedParams;
   const body  =  await request.json()
   try {
 
