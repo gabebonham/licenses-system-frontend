@@ -8,7 +8,7 @@ import {
 export default async function HomePage() {
   const res = await getExperts()
   const resTrades = await getTrades()
-  const filteredPerformances = await getPerformances()
+  const filteredPerformances = await getPerformances(res.data)
   const tr = [
     {
       id: crypto.randomUUID(),
@@ -69,9 +69,9 @@ export default async function HomePage() {
   return (
     <main className="w-full">
       <HomePageComponent
-        trades={tr}
+        trades={resTrades.data ?? []}
         res={res}
-        performances={res.data?.performances ?? []}
+        performances={filteredPerformances.data ?? []}
       />
     </main>
   )

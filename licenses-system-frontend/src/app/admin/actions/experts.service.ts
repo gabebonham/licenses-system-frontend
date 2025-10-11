@@ -1,103 +1,108 @@
 'use server'
 
-import { exx } from '@/entities/expert.entity'
+import { Expert, exx } from '@/entities/expert.entity'
 import { User } from '@/entities/user.entity'
 import { api, apiPublic } from '@/lib/api'
+import axios from 'axios'
 
 export async function getExperts() {
   try {
     const res = await api.get('/experts').then((r) => r.data)
-    console.log('res')
-    console.log(res)
     return { success: true, data: res }
   } catch (e) {
     return { success: false }
   }
 }
-export async function getPerformances() {
+export async function getPerformances(experts: Expert[]) {
   try {
-    const res = await api.get('/performance').then((r) => r.data)
-    const data = [
-      {
-        trades: 1241,
-        winTrades: 1241,
-        lossTrades: 1241,
-        bestTrade: 1241,
-        worstTrade: 1241,
-        profitFactor: 1241,
-        payoff: 1241,
-        drawDown: 1241,
-      },
-    ]
-    return { success: true, data }
+    const results = [];
+
+    for (const expert of experts) {
+      const r = await axios.get(
+        `${process.env.BACKEND_URL}:5002/performance/${expert.magicNumber}`,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+      results.push({ ...r.data, magicNumber: expert.magicNumber });
+    }
+
+    return { success: true, data: results };
   } catch (e) {
-    return { success: false }
+    console.error('Error fetching performances:', e);
+    return { success: false };
   }
 }
+
 export async function getTrades() {
   try {
-    const res = await api.get('/trade').then((r) => r.data)
-    return {
-      success: true,
-      data: [
-        {
-          id: crypto.randomUUID(),
-          ticket: 1001,
-          symbol: 'EURUSD',
-          time: 1696000000,
-          volume: 1.0,
-          price: 1.105,
-          profit: 120.5,
-          type: 0, // Buy
-          magic: 1696000000,
-        },
-        {
-          id: crypto.randomUUID(),
-          ticket: 1002,
-          symbol: 'GBPUSD',
-          time: 1696086400,
-          volume: 0.5,
-          price: 1.255,
-          profit: -45.2,
-          type: 1, // Sell
-          magic: 1696000000,
-        },
-        {
-          id: crypto.randomUUID(),
-          ticket: 1003,
-          symbol: 'USDJPY',
-          time: 1696172800,
-          volume: 2.0,
-          price: 145.2,
-          profit: 300.0,
-          type: 0,
-          magic: 1696000000,
-        },
-        {
-          id: crypto.randomUUID(),
-          ticket: 1004,
-          symbol: 'AUDUSD',
-          time: 1696259200,
-          volume: 1.5,
-          price: 0.68,
-          profit: -75.0,
-          type: 1,
-          magic: 1696000000,
-        },
-        {
-          id: crypto.randomUUID(),
-          ticket: 1005,
-          symbol: 'USDCAD',
-          time: 1696345600,
-          volume: 1.2,
-          price: 1.34,
-          profit: 210.0,
-          type: 0,
-          magic: 1696000000,
-        },
-      ],
-    }
-    // return { success: true, data: res }
+    const res = await axios
+  .get(`${process.env.BACKEND_URL}:5002/trade`, {
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true,
+  })
+  .then((r) => r.data);
+    // return {
+    //   success: true,
+    //   data: [
+    //     {
+    //       id: crypto.randomUUID(),
+    //       ticket: 1001,
+    //       symbol: 'EURUSD',
+    //       time: 1696000000,
+    //       volume: 1.0,
+    //       price: 1.105,
+    //       profit: 120.5,
+    //       type: 0, // Buy
+    //       magic: 1696000000,
+    //     },
+    //     {
+    //       id: crypto.randomUUID(),
+    //       ticket: 1002,
+    //       symbol: 'GBPUSD',
+    //       time: 1696086400,
+    //       volume: 0.5,
+    //       price: 1.255,
+    //       profit: -45.2,
+    //       type: 1, // Sell
+    //       magic: 1696000000,
+    //     },
+    //     {
+    //       id: crypto.randomUUID(),
+    //       ticket: 1003,
+    //       symbol: 'USDJPY',
+    //       time: 1696172800,
+    //       volume: 2.0,
+    //       price: 145.2,
+    //       profit: 300.0,
+    //       type: 0,
+    //       magic: 1696000000,
+    //     },
+    //     {
+    //       id: crypto.randomUUID(),
+    //       ticket: 1004,
+    //       symbol: 'AUDUSD',
+    //       time: 1696259200,
+    //       volume: 1.5,
+    //       price: 0.68,
+    //       profit: -75.0,
+    //       type: 1,
+    //       magic: 1696000000,
+    //     },
+    //     {
+    //       id: crypto.randomUUID(),
+    //       ticket: 1005,
+    //       symbol: 'USDCAD',
+    //       time: 1696345600,
+    //       volume: 1.2,
+    //       price: 1.34,
+    //       profit: 210.0,
+    //       type: 0,
+    //       magic: 1696000000,
+    //     },
+    //   ],
+    // }
+    return { success: true, data: res }
   } catch (e) {
     return { success: false }
   }
@@ -178,5 +183,15 @@ export async function setFirst(id: string, current: boolean) {
     )
   } catch (e) {
     console.error('Error creating expert:', e)
+  }
+}
+export async function downloadFile(id: string) {
+  try {
+    const res = await api.get('/experts/' + id, {
+      responseType: 'blob',
+    }).then(r=>r.data)
+    return {success:true,data: res}
+  } catch (e) {
+    console.error('Error getting file:', e)
   }
 }

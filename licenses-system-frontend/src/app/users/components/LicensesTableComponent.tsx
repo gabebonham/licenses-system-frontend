@@ -10,10 +10,40 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Expert } from '@/entities/expert.entity'
 import { License } from '@/entities/license.entity'
 import { handleDownload } from '@/lib/download-util'
 
 export function LicensesTableComponent({ licenses }: { licenses: License[] }) {
+  const handler = async (expert:Expert) => {
+    try {
+      const finalName = expert.fileContentUrl?.split('/').pop() as string
+      // Call the backend endpoint to download the file
+      const response = await fetch(`/api/download/${expert.id}`,{method:"POST",body:JSON.stringify({name:finalName})});
+
+      if (!response.ok) {
+        throw new Error('Error fetching the file');
+      }
+
+      // Create a blob from the response data
+      const blob = await response.blob();
+
+      // Create a temporary link to trigger the download
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download =finalName; // Set the download filename
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Clean up the URL object
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading file:', error);
+    }
+  };
+
   return (
     <Table>
       <TableCaption>Uma lista de suas licenças.</TableCaption>
@@ -38,10 +68,7 @@ export function LicensesTableComponent({ licenses }: { licenses: License[] }) {
                 {license.product?.expert?.fileContentUrl ? (
                   <CustomButton
                     action={() =>
-                      handleDownload(
-                        ((process.env.NEXT_PUBLIC_BACKEND_URL as string) +
-                          license.product?.expert?.fileContentUrl) as string,
-                      )
+                      handler(license.product?.expert as Expert)
                     }
                     label="Baixar Conteúdo"
                     color="Action"

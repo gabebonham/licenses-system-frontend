@@ -28,6 +28,7 @@ export default function InfoModalButton({
   const [targetTimeButton, setTargetTimeButton] = useState<undefined | number>()
   const [link, setLink] = useState<string | undefined>()
   const logged = isLogged()
+  console.log(trades)
   return (
     <Dialog>
       <DialogTrigger className="w-full">{btn}</DialogTrigger>
@@ -49,33 +50,33 @@ export default function InfoModalButton({
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Negociações com lucro:</span>
-                      <span> {performanceReport?.winTrades ?? 0}</span>
+                      <span> {performanceReport?.winningTrades ?? 0}</span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Negociações com perda:</span>
-                      <span> {performanceReport?.lossTrades ?? 0}</span>
+                      <span> {performanceReport?.losingTrades ?? 0}</span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Melhor negociação:</span>
-                      <span> {performanceReport?.bestTrade ?? 0}</span>
+                      <span> {performanceReport?.bestTrade.toFixed(2) ?? 0}</span>
                     </p>
                   </div>
                   <div className="flex flex-col gap-y-4 xl:gap-y-12 w-full items-between">
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Fator de lucro:</span>
-                      <span> {performanceReport?.profitFactor ?? 0}</span>
+                      <span> {performanceReport?.profitFactor.toFixed(2) ?? 0}</span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Lucro médio:</span>
-                      <span> {performanceReport?.payoff ?? 0}</span>
+                      <span> {performanceReport?.averageProfit.toFixed(2) ?? 0}</span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Drawdown:</span>
-                      <span> {performanceReport?.drawDown ?? 0}</span>
+                      <span> {performanceReport?.drawdown.toFixed(2) ?? 0}</span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Pior negociação:</span>
-                      <span> {performanceReport?.worstTrade ?? 0}</span>
+                      <span> {performanceReport?.worstTrade.toFixed(2) ?? 0}</span>
                     </p>
                   </div>
                 </div>

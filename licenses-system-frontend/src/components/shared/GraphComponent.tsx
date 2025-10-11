@@ -71,6 +71,8 @@ export default function GraphComponent({ trades }: Props) {
       symbol: t.symbol,
     }
   })
+  console.log('trades')
+  console.log(trades)
 
   return (
     <div className="flex w-full flex-col items-center ">

@@ -108,7 +108,7 @@ export default function ViewProducts({
           </Card>
         )}
         {theseExperts.length >= 2 && (
-          <Card className="hover:shadow-[0_0_25px_0_#a7e6ff] transition-all px-6 text-blueLight/80 bg-gradient-to-br min-h-[504px] from-secondary to-primary border-1 border-blueLight/30 lg:w-1/3">
+          <Card className="hover:shadow-[0_0_25px_0_#a7e6ff] transition-all px-6 text-blueLight/80 bg-gradient-to-br min-h-[504px] from-secondary to-primary border-1 border-blueLight/30 w-11/12 lg:w-1/3">
             <div className="flex items-center w-full justify-between">
               <Lightbulb className="bg-primary p-3 rounded-xl box-content size-10" />
               <div className="w-fit">
@@ -174,7 +174,7 @@ export default function ViewProducts({
           theseExperts.slice(2, 4).map((currentExpert) => (
             <Card
               key={currentExpert.id}
-              className=" hover:shadow-[0_0_25px_0_#a7e6ff] transition-all px-6 text-blueLight/80 bg-gradient-to-br min-h-[504px] from-secondary to-primary border-1 border-blueLight/30 "
+              className=" hover:shadow-[0_0_25px_0_#a7e6ff] transition-all px-6 text-blueLight/80 bg-gradient-to-br min-h-[504px] from-secondary to-primary border-1 border-blueLight/30 w-11/12"
             >
               <div className="flex items-center w-full justify-between">
                 <Lightbulb className="bg-primary p-3 rounded-xl box-content size-10" />
