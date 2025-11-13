@@ -5,16 +5,17 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Bot } from 'lucide-react'
+import { ArrowLeft, Bot } from 'lucide-react'
 import Link from 'next/link'
 import { register } from '../actions/register.action'
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-
+import logo from '@/../public/images/Vector.png'
+import Image from 'next/image'
 export default function RegisterPage() {
   const router = useRouter()
-  const searchParams = useSearchParams();
-  const lastLink = searchParams.get('lastLink');
+  const searchParams = useSearchParams()
+  const lastLink = searchParams.get('lastLink')
   const [error, setError] = useState<string | undefined>()
   const handleRegister = async (formData: FormData) => {
     const result = (await register(formData)) as any
@@ -23,33 +24,43 @@ export default function RegisterPage() {
       setError(result.error)
     } else {
       setError(undefined)
-      if (link){
-        console.log(link)
+      if (link) {
         router.push(link)
         return
       } else {
-
         router.push('/users/dashboard')
         return
       }
     }
   }
   return (
-    <section className="text-blueLight   w-full  flex flex-col items-center">
-      <div className="min-lg:w-2/5 min-lg:items-center min-md:px-12 min-md:items-start w-full px-6 py-6 flex flex-col items-center min-md:w-3/6">
-        <h1 className="lg:text-3xl text-2xl gap-x-4 text-blueLight font-bold flex items-center pb-6">
-          <Bot className="lg:size-12 size-8 box-content p-3 rounded-lg bg-primary" />
+    <section className="text-blueLight h-full  w-full  flex flex-col items-center  ">
+      <div className="min-lg:w-2/5 gap-y-6 h-full min-lg:items-center min-md:px-12 min-md:items-start w-full px-6 py-12 flex flex-col items-center min-md:w-3/6">
+        <h1 className="lg:text-3xl text-2xl gap-x-4 text-blueDark flex-col justify-center font-bold flex items-center pb-3">
+          <Link href={'/home'} className="flex items-center gap-x-4 ">
+            <Image
+              src={logo}
+              alt="logo"
+              className="w-16 lg:w-24 mb-3"
+              width={800}
+              height={800}
+            />
+          </Link>
           H4Investimentos
         </h1>
         <form
           action={handleRegister}
           className=" w-full  min-w-80 max-w-full   "
         >
-          <Card className="lg:px-8 p-4 space-y-4 py-8 rounded-lg bg-gradient-to-br from-secondary to-primary border-1 border-blueLight/30">
+          <Card className="lg:px-8  p-4 h-[100%] border-blueLight space-y-4 py-8 text-grayLight rounded-2xl  border-1 shadow-2xl/50 bg-gradient-to-br from-blueDark/90 to-blueDark">
             <div className="w-full justify-center text-center space-y-2">
-              <p className="lg:text-4xl text-xl text-blueLight font-bold">
-                Cadastro
-              </p>
+              <div className="flex items-center justify-between">
+                <Link href="/home">
+                  <ArrowLeft className="size-10" />
+                </Link>
+                <p className="lg:text-4xl text-xl font-bold">Cadastro</p>
+                <div className="size-10"></div>
+              </div>
               <p>
                 {!!error && (
                   <span className="text-shadow-2xl text-red-400 [text-shadow:0_0_5px_#ef4444,0_0_10px_#ef4444]  ">
@@ -58,10 +69,7 @@ export default function RegisterPage() {
                 )}
               </p>
               <p className="lg:pt-4 lg:text-xl text-blueLight/60">
-                Já tem uma conta?{' '}
-                <Link className="text-blueLight" href={`/login${lastLink?`?lastLink=${lastLink}`:''}`}>
-                  Clique Aqui
-                </Link>
+                Seja Bem Vindo(a)!
               </p>
             </div>
             <div className="space-y-6">
@@ -72,7 +80,7 @@ export default function RegisterPage() {
                 <CustomInput
                   icon="AtSign"
                   type="text"
-                  css="lg:text-xl lg:h-12"
+                  css="lg:text-xl lg:h-12 border-grayLight/50"
                   name="email"
                 />
               </div>
@@ -84,7 +92,7 @@ export default function RegisterPage() {
                   name="name"
                   icon="Pencil"
                   type="text"
-                  css="lg:text-xl lg:h-12"
+                  css="lg:text-xl lg:h-12 border-grayLight/50"
                 />
               </div>
               <div className="lg:space-y-4 space-y-2">
@@ -111,17 +119,28 @@ export default function RegisterPage() {
             <div className="text-center space-y-4 lg:text-xl text-blueLight/60">
               <CustomButton
                 label="Registrar"
-                color="Action"
-                css="lg:text-xl lg:py-6 "
+                color="Option"
+                css="lg:text-xl lg:py-7 border-grayLight "
                 submit
               />
-              Esqueceu a senha?{' '}
+              {/* Esqueceu a senha?{' '}
               <Link
                 className="text-blueLight lg:text-xl"
-                href={`/forgot-password${lastLink?`?lastLink=${lastLink}`:''}`}
+                href={`/forgot-password${
+                  lastLink ? `?lastLink=${lastLink}` : ''
+                }`}
               >
                 Clique aqui
-              </Link>
+              </Link> */}
+              <p className="lg:pt-4 lg:text-xl text-blueLight/60">
+                Já tem uma conta?{' '}
+                <Link
+                  className="text-blueLight"
+                  href={`/login${lastLink ? `?lastLink=${lastLink}` : ''}`}
+                >
+                  Clique Aqui
+                </Link>
+              </p>
             </div>
           </Card>
         </form>

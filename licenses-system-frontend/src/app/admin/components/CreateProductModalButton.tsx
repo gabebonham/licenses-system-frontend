@@ -62,9 +62,12 @@ export default function CreateProductModalButton({ btn }: { btn: any }) {
   return (
     <Dialog open={isActive} onOpenChange={activate}>
       <DialogTrigger className="w-full">{btn}</DialogTrigger>
-      <DialogContent className=" h-9/12  min-w-5/12 w-full p-2 lg:p-6 z-90   ">
+      <DialogContent className=" h-fit text-dark border-dark bg-grayLight  min-w-5/12  p-2 lg:p-6 z-90   ">
+        <DialogTitle className="lg:text-4xl lg:w-full font-medium text-center">
+          Criar Produto
+        </DialogTitle>
         <ScrollArea className="lg:flex-row  min-h-8/12 h-full  w-full flex flex-col items-center">
-          <div className="text-blueLight  lg:flex-row h-full   lg:max-w-full w-full flex flex-col items-center lg:items-start gap-y-3">
+          <div className="text-dark  lg:flex-row h-full   lg:max-w-full w-full flex flex-col items-center lg:items-start gap-y-3">
             <div className=" lg:px-6 flex items-center h-full  flex-col gap-y-2 py-3 lg:gap-y-2 lg:w-full   ">
               <form
                 action={handleCreateProduct}
@@ -79,48 +82,76 @@ export default function CreateProductModalButton({ btn }: { btn: any }) {
                       <span className="font-bold"> Nome:</span>
                       <span>
                         {' '}
-                        <CustomInput name="name" type="text" />
+                        <CustomInput
+                          name="name"
+                          type="text"
+                          css="text-dark  border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Preço:</span>
                       <span>
-                        <CustomInput name="price" type="text" />
+                        <CustomInput
+                          name="price"
+                          type="text"
+                          css="text-dark  border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Volume Máximo:</span>
                       <span>
                         {' '}
-                        <CustomInput name="maxVolume" type="text" />
+                        <CustomInput
+                          name="maxVolume"
+                          type="text"
+                          css="text-dark  border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Id do Expert:</span>
                       <span>
                         {' '}
-                        <CustomInput name="expertId" type="text" />
+                        <CustomInput
+                          name="expertId"
+                          type="text"
+                          css="text-dark  border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Token do WebHook:</span>
                       <span>
                         {' '}
-                        <CustomInput name="webHookToken" type="text" />
+                        <CustomInput
+                          name="webHookToken"
+                          type="text"
+                          css="text-dark  border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Nome Last Link:</span>
                       <span>
                         {' '}
-                        <CustomInput name="lastLinkName" type="text" />
+                        <CustomInput
+                          name="lastLinkName"
+                          type="text"
+                          css="text-dark  border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Link para Checkout:</span>
                       <span>
                         {' '}
-                        <CustomInput name="checkoutLink" type="text" />
+                        <CustomInput
+                          name="checkoutLink"
+                          type="text"
+                          css="text-dark  border-dark"
+                        />
                       </span>
                     </p>
                   </div>

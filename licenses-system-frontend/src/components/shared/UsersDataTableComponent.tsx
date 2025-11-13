@@ -45,8 +45,6 @@ import { deleteUser } from '@/app/admin/actions/users.service'
 import { toast } from 'sonner'
 
 export const columns: ColumnDef<User>[] = [
- 
-
   {
     accessorKey: 'id',
     header: 'id',
@@ -178,7 +176,7 @@ export function UsersDataTable({ users }: { users: User[] }) {
   })
 
   return (
-    <div className="w-full text-blueLight  ">
+    <div className="w-full text-dark  ">
       <div className="flex items-center py-4 gap-x-4 justify-around">
         <Input
           placeholder="Filter emails..."
@@ -186,15 +184,15 @@ export function UsersDataTable({ users }: { users: User[] }) {
           onChange={(event) =>
             table.getColumn('email')?.setFilterValue(event.target.value)
           }
-          className="max-w-sm border-white/30 lg:text-xl lg:h-12"
+          className="max-w-sm border-dark border-1 text-dark lg:text-xl lg:h-12"
         />
         <div className="lg:block hidden">
           <CreateUserModalButton
             btn={
               <CustomButton
                 label="Adicionar Usuário"
-                css="w-fit px-12 h-12 lg:text-xl rounded-lg  "
-                color="Action"
+                css="w-fit px-12 h-12 lg:text-xl   "
+                color="Option"
               />
             }
           />
@@ -205,7 +203,7 @@ export function UsersDataTable({ users }: { users: User[] }) {
               <CustomButton
                 icon="Plus"
                 css="w-fit  lg:text-xl rounded-lg  "
-                color="Action"
+                color="Option"
               />
             }
           />
@@ -215,15 +213,12 @@ export function UsersDataTable({ users }: { users: User[] }) {
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
-              className="ml-auto cursor-pointer border-white/30 text-blueLight/60 lg:text-xl lg:h-12"
+              className="ml-auto cursor-pointer border-dark bg-grayLight text-dark lg:text-xl lg:h-12"
             >
               Columns <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="bg-foreground text-blueLight "
-          >
+          <DropdownMenuContent align="end" className="bg-grayLight text-dark ">
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
@@ -244,20 +239,14 @@ export function UsersDataTable({ users }: { users: User[] }) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="overflow-x-auto rounded-md border border-white/30 bg-foreground px-8 ">
+      <div className="overflow-x-auto rounded-md border border-dark bg-grayLight px-8 ">
         <Table className="min-w-full  ">
-          <TableHeader>
+          <TableHeader className="">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow
-                className="border-white/30 text-blueLight lg:h-18"
-                key={headerGroup.id}
-              >
+              <TableRow className="border-dark   lg:h-18" key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead
-                      key={header.id}
-                      className="text-blueLight/70 lg:text-xl"
-                    >
+                    <TableHead className="text-dark lg:text-xl">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -270,11 +259,11 @@ export function UsersDataTable({ users }: { users: User[] }) {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="border-white/30">
+          <TableBody className="border-dark">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                  className="border-white/30 lg:text-xl lg:h-18"
+                  className="border-dark lg:text-xl lg:h-18"
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                 >

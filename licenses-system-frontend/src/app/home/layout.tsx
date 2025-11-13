@@ -18,9 +18,9 @@ export default async function AuthLayout({
     tokenObj = await decodeJwt(tokenContent)
   }
   return (
-    <main className="w-full">
+    <main className="">
       <HomeHeader token={tokenObj} />
-      <div className=" min-h-screen w-full">{children}</div>
+      <div className=" min-h-screen ">{children}</div>
       <HomeFooter />
     </main>
   )

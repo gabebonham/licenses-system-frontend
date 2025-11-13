@@ -1,7 +1,6 @@
 'use server'
 
-import { User } from '@/entities/user.entity'
-import { api, apiPublic } from '@/lib/api'
+import { api } from '@/lib/api'
 
 export async function createLicence(
   userId: string,
@@ -42,8 +41,8 @@ export async function toggleLicenseStatus(id: string, value: string) {
 
 export async function getLicenses() {
   try {
-    const res = await api.get('/licenses').then((r) => r.data)
-    return { success: true, data: res }
+    const res = await api.get('/licenses')
+    return { success: res.status == 200, data: res.data }
   } catch (e) {
     return { success: false }
   }

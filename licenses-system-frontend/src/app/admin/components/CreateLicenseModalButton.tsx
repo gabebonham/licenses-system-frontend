@@ -53,9 +53,12 @@ export default function CreateLicenseModalButton({ btn }: { btn: any }) {
   return (
     <Dialog open={isActive} onOpenChange={activate}>
       <DialogTrigger>{btn}</DialogTrigger>
-      <DialogContent className=" h-9/12  min-w-5/12 w-full p-2 lg:p-6 z-90   ">
+      <DialogContent className=" h-fit text-dark  border-dark bg-grayLight min-w-5/12 w-full p-2 lg:p-6 z-90   ">
+        <DialogTitle className="lg:text-4xl lg:w-full font-medium text-center">
+          Criar Licença
+        </DialogTitle>
         <ScrollArea className="lg:flex-row  min-h-8/12 h-full  w-full flex flex-col items-center">
-          <div className="text-blueLight  lg:flex-row h-full   lg:max-w-full w-full flex flex-col items-center lg:items-start gap-y-3">
+          <div className="  lg:flex-row h-full   lg:max-w-full w-full flex flex-col items-center lg:items-start gap-y-3">
             <div className=" lg:px-6 flex items-center h-full  flex-col gap-y-2 py-3 lg:gap-y-2 lg:w-full   ">
               <form
                 action={handleSubmit}
@@ -67,20 +70,32 @@ export default function CreateLicenseModalButton({ btn }: { btn: any }) {
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Id do Produto:</span>
                       <span>
-                        <CustomInput name="productId" type="text" />
+                        <CustomInput
+                          name="productId"
+                          type="text"
+                          css="text-dark  border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Id do Usuário:</span>
                       <span>
-                        <CustomInput name="userId" type="text" />
+                        <CustomInput
+                          name="userId"
+                          type="text"
+                          css="text-dark  border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Status:</span>
                       <span>
                         {' '}
-                        <CustomInput name="status" type="text" />
+                        <CustomInput
+                          name="status"
+                          type="text"
+                          css="text-dark  border-dark"
+                        />
                       </span>
                     </p>
                   </div>

@@ -61,9 +61,12 @@ export default function CreateBotModalButton({ btn }: { btn: any }) {
   return (
     <Dialog open={isActive} onOpenChange={activate}>
       <DialogTrigger className="w-full">{btn}</DialogTrigger>
-      <DialogContent className=" h-9/12  min-w-5/12 w-full p-2 lg:p-6 z-90   ">
+      <DialogContent className=" h-9/12 text-dark border-dark bg-grayLight min-w-5/12 w-full p-2 lg:p-6 z-90   ">
+        <DialogTitle className="lg:text-4xl lg:w-full font-medium text-center">
+          Criar Expert
+        </DialogTitle>
         <ScrollArea className="lg:flex-row  min-h-8/12 h-full  w-full flex flex-col items-center">
-          <div className="text-blueLight  lg:flex-row h-full   lg:max-w-full w-full flex flex-col items-center lg:items-start gap-y-3">
+          <div className="text-dark  lg:flex-row h-full   lg:max-w-full w-full flex flex-col items-center lg:items-start gap-y-3">
             <div className=" lg:px-6 flex items-center h-full  flex-col gap-y-2 py-3 lg:gap-y-2 lg:w-full   ">
               <form
                 action={handleCreateExpert}
@@ -76,25 +79,41 @@ export default function CreateBotModalButton({ btn }: { btn: any }) {
                       <span className="font-bold"> Nome:</span>
                       <span>
                         {' '}
-                        <CustomInput name="name" type="text" />
+                        <CustomInput
+                          name="name"
+                          type="text"
+                          css="text-dark border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Description:</span>
                       <span>
-                        <CustomInput name="description" type="text" />
+                        <CustomInput
+                          name="description"
+                          type="text"
+                          css="text-dark border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Magic:</span>
                       <span>
-                        <CustomInput name="magic" type="text" />
+                        <CustomInput
+                          name="magic"
+                          type="text"
+                          css="text-dark border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Capital Inicial:</span>
                       <span>
-                        <CustomInput name="initAmount" type="text" />
+                        <CustomInput
+                          name="initAmount"
+                          type="text"
+                          css="text-dark border-dark"
+                        />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">

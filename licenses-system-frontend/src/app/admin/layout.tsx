@@ -21,10 +21,7 @@ export default async function AdminLayout({
   }
   return (
     <main>
-      <div className="min-h-screen">
-        <PrivateHeader />
-        {children}
-      </div>
+      <div className="min-h-screen h-dvh">{children}</div>
     </main>
   )
 }

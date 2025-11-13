@@ -1,11 +1,7 @@
 'use client'
 
 import CustomButton from '@/components/shared/buttons/CustomButton'
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import React, { useState } from 'react'
 import ProductCarousel from '../../components/ProductCarousel'
@@ -28,7 +24,6 @@ export default function InfoModalButton({
   const [targetTimeButton, setTargetTimeButton] = useState<undefined | number>()
   const [link, setLink] = useState<string | undefined>()
   const logged = isLogged()
-  console.log(trades)
   return (
     <Dialog>
       <DialogTrigger className="w-full">{btn}</DialogTrigger>
@@ -36,6 +31,7 @@ export default function InfoModalButton({
         <ScrollArea className="lg:flex-row  min-h-8/12 h-full  w-full flex flex-col items-center">
           <div className="text-blueLight  lg:flex-row h-full   lg:max-w-full w-full flex flex-col items-center justify-center lg:items-start gap-y-3">
             <GraphComponent
+              name="asdf"
               trades={trades.filter(
                 (trade: any) => trade.magic == expert?.magicNumber,
               )}
@@ -58,25 +54,40 @@ export default function InfoModalButton({
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Melhor negociação:</span>
-                      <span> {performanceReport?.bestTrade.toFixed(2) ?? 0}</span>
+                      <span>
+                        {' '}
+                        {performanceReport?.bestTrade.toFixed(2) ?? 0}
+                      </span>
                     </p>
                   </div>
                   <div className="flex flex-col gap-y-4 xl:gap-y-12 w-full items-between">
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Fator de lucro:</span>
-                      <span> {performanceReport?.profitFactor.toFixed(2) ?? 0}</span>
+                      <span>
+                        {' '}
+                        {performanceReport?.profitFactor.toFixed(2) ?? 0}
+                      </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Lucro médio:</span>
-                      <span> {performanceReport?.averageProfit.toFixed(2) ?? 0}</span>
+                      <span>
+                        {' '}
+                        {performanceReport?.averageProfit.toFixed(2) ?? 0}
+                      </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Drawdown:</span>
-                      <span> {performanceReport?.drawdown.toFixed(2) ?? 0}</span>
+                      <span>
+                        {' '}
+                        {performanceReport?.drawdown.toFixed(2) ?? 0}
+                      </span>
                     </p>
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Pior negociação:</span>
-                      <span> {performanceReport?.worstTrade.toFixed(2) ?? 0}</span>
+                      <span>
+                        {' '}
+                        {performanceReport?.worstTrade.toFixed(2) ?? 0}
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -94,22 +105,28 @@ export default function InfoModalButton({
                   )}
                 </div>
               </div>
-              {logged?
-              <CustomButton
-                label="Comprar"
-                inactive={link != undefined}
-                css="lg:text-2xl lg:py-8 rounded-2xl"
-                color="Action"
-                href={link}
-              />:
-            <CustomButton
-                label="Comprar"
-                inactive={link != undefined}
-                css="lg:text-2xl lg:py-8 rounded-2xl"
-                color="Action"
-                href={`/login?lastLink=${link}`}
-              />}
-              {!logged&&<h1 className='text-red-400 text-sm'>Obs: Você será redirecionado para o login antes</h1>}
+              {logged ? (
+                <CustomButton
+                  label="Comprar"
+                  inactive={link != undefined}
+                  css="lg:text-2xl lg:py-8 rounded-2xl"
+                  color="Action"
+                  href={link}
+                />
+              ) : (
+                <CustomButton
+                  label="Comprar"
+                  inactive={link != undefined}
+                  css="lg:text-2xl lg:py-8 rounded-2xl"
+                  color="Action"
+                  href={`/login?lastLink=${link}`}
+                />
+              )}
+              {!logged && (
+                <h1 className="text-red-400 text-sm">
+                  Obs: Você será redirecionado para o login antes
+                </h1>
+              )}
             </div>
           </div>
         </ScrollArea>

@@ -11,6 +11,8 @@ import {
   Bar,
   Legend,
   ResponsiveContainer,
+  Area,
+  AreaChart,
 } from 'recharts'
 
 type Trade = {
@@ -26,6 +28,7 @@ type Trade = {
 
 interface Props {
   trades: Trade[]
+  name: string
 }
 
 // Possible symbols
@@ -57,7 +60,7 @@ export function generateMockTrades(count = 500): Trade[] {
   return trades
 }
 
-export default function GraphComponent({ trades }: Props) {
+export default function GraphComponent({ trades, name }: Props) {
   // Sort trades by time
   const sorted = [...trades].sort((a, b) => a.time - b.time)
   // Build cumulative profit
@@ -71,27 +74,57 @@ export default function GraphComponent({ trades }: Props) {
       symbol: t.symbol,
     }
   })
-  console.log('trades')
-  console.log(trades)
 
   return (
-    <div className="flex w-full flex-col items-center ">
-      <div className="w-full">
-        <h2 className="text-xl font-semibold mb-2">Curva De Capital</h2>
-        <ResponsiveContainer width="100%" height={500} className={''}>
-          <LineChart data={equityData} className=''  margin={{ top: 0, right: 40, bottom: 0, left: -20 }} >
-            <CartesianGrid strokeDasharray="3 3"     />
-            <XAxis dataKey="trade" />
-            <YAxis />
+    <div className="w-full h-[350px] xl:h-[550px] ">
+      <div className="w-full flex flex-col items-center  h-full ">
+        <ResponsiveContainer width="100%" height="90%" className={'xl:px-24'}>
+          <AreaChart
+            data={equityData}
+            className="bg-blueDark py-4 w-full rounded-2xl shadow-lg h-full shadow-black"
+            margin={{ top: 0, right: 0, bottom: -30, left: -60 }}
+          >
+            <CartesianGrid
+              strokeDasharray="3 8"
+              stroke="#FFFFFF00"
+              className="h-full"
+            />
+            <XAxis
+              dataKey="trade"
+              tick={{ fill: '#FFFFFF00' }}
+              tickLine={{ stroke: '#FFFFFF00' }}
+              axisLine={{ stroke: '#FFFFFF00' }}
+            />
+            <YAxis
+              tick={{ fill: '#FFFFFF00' }}
+              tickLine={{ stroke: '#FFFFFF00' }}
+              axisLine={{ stroke: '#FFFFFF00' }}
+            />
             <Tooltip />
+
+            <Area
+              type="monotone"
+              dataKey="resultado"
+              stroke="none"
+              fill="#4bc0c0"
+              fillOpacity={0.2} // transparency
+              className="h-full"
+            />
+
+            {/* Line on top of area */}
             <Line
-              activeDot={false}
               type="monotone"
               dataKey="resultado"
               stroke="#4bc0c0"
+              strokeWidth={4}
+              activeDot={false}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
+
+        <h1 className="text-center w-full text-2xl font-bold pt-2 lg:py-8">
+          {name}
+        </h1>
       </div>
 
       {/* <div>

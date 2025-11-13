@@ -29,15 +29,15 @@ export default function CustomInput(props: Props) {
   }
   if (props.type == 'text') {
     return (
-      <div className=" border-blueLight/50 border-1 rounded-md flex items-center pr-2 transition-all duration-200 focus-within:shadow-[0_0_05px_0_#a7e6ff]">
-        <Input
-          type="text"
-          className={`border-transparent text-blueLight p-0 pl-2 pb-1 shadow-none ${props.css}`}
-          placeholder={props.placeholder}
-          name={props.name}
-        />
-        {props.icon && <IconComponent className="size-5 text-blueLight" />}
-      </div>
+      // <div className=" border-dark/50 border-1 rounded-md flex items-center pr-2 transition-all duration-200 focus-within:shadow-[0_0_05px_0_#a7e6ff]">
+      <Input
+        type="text"
+        className={`border-transparent text-blueLight p-0 pl-2 pb-1 shadow-none border-dark/50 border-1 rounded-md flex items-center pr-2 transition-all duration-200 focus-within:shadow-[0_0_05px_0_#a7e6ff] ${props.css}`}
+        placeholder={props.placeholder}
+        name={props.name}
+      />
+      //   {props.icon && <IconComponent className="size-5 text-blueLight" />}
+      // </div>
     )
   }
   if (props.type == 'password') {

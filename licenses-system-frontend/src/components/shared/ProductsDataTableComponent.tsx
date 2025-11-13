@@ -48,8 +48,6 @@ import { toast } from 'sonner'
 
 export function createColumns(users: User[]) {
   const columns: ColumnDef<Product>[] = [
-    
-
     {
       accessorKey: 'id',
       header: 'id',
@@ -201,7 +199,7 @@ export function ProductsDataTable({
           onChange={(event) =>
             table.getColumn('name')?.setFilterValue(event.target.value)
           }
-          className="max-w-sm border-white/30 lg:text-xl lg:h-12"
+          className="max-w-sm border-dark lg:text-xl lg:h-12"
         />
         <div className="lg:block hidden">
           <CreateProductModalButton
@@ -209,7 +207,7 @@ export function ProductsDataTable({
               <CustomButton
                 label="Criar Produto"
                 css="w-fit px-12 h-12 lg:text-xl rounded-lg  "
-                color="Action"
+                color="Option"
               />
             }
           />
@@ -220,7 +218,7 @@ export function ProductsDataTable({
               <CustomButton
                 icon="Plus"
                 css="w-fit  lg:text-xl rounded-lg  "
-                color="Action"
+                color="Option"
               />
             }
           />
@@ -230,15 +228,12 @@ export function ProductsDataTable({
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
-              className="ml-auto cursor-pointer border-white/30 text-blueLight/60 lg:text-xl lg:h-12"
+              className="ml-auto cursor-pointer bg-grayLight border-dark text-dark lg:text-xl lg:h-12"
             >
               Columns <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="bg-foreground text-blueLight "
-          >
+          <DropdownMenuContent align="end" className="bg-grayLight text-dark ">
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
@@ -259,20 +254,17 @@ export function ProductsDataTable({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="overflow-x-auto rounded-md border border-white/30 bg-foreground px-8 ">
+      <div className="overflow-x-auto rounded-md border border-dark bg-grayLight px-8 ">
         <Table className="min-w-full  ">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
-                className="border-white/30 text-blueLight lg:h-18"
+                className="border-dark text-dark lg:h-18"
                 key={headerGroup.id}
               >
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead
-                      key={header.id}
-                      className="text-blueLight/70 lg:text-xl"
-                    >
+                    <TableHead key={header.id} className="text-dark lg:text-xl">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -285,11 +277,11 @@ export function ProductsDataTable({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="border-white/30">
+          <TableBody className="border-dark text-dark">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                  className="border-white/30 lg:text-xl lg:h-18"
+                  className="border-dark lg:text-xl lg:h-18"
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                 >

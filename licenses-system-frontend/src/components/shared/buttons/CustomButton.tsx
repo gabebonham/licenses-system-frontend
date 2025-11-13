@@ -3,6 +3,8 @@ import * as LucideIcons from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import { logout } from '@/lib/logout'
+import { usePathname } from 'next/navigation'
 type ButtonColors = 'Action' | 'Option' | undefined
 interface Props {
   label?: string
@@ -12,6 +14,7 @@ interface Props {
   submit?: boolean
   currentRef?: any
   inactive?: boolean
+  logout?: boolean
   href?: string
   action?: () => void
 }
@@ -25,18 +28,34 @@ function getLucideIcon(name?: string, size = 20) {
   return Icon ? <Icon size={size} className="lg:size-8 pt-1" /> : null
 }
 const colorMap = {
-  Action: 'bg-blueLight hover:bg-blueLight',
   Option:
-    'bg-primary hover:bg-primary text-blueLight border-1 border-blueLight',
+    'bg-blueLight text-blueDark hover:bg-blueDark hover:text-blueLight  border-blueDark border-1',
+  Action:
+    'bg-blueDark hover:bg-blueLight hover:text-blueDark text-blueLight border-1 border-blueDark border-1',
   default: 'bg-transparent',
 }
 
 export default function CustomButton(props: Props) {
+  const pathname = usePathname()
   const router = useRouter()
   const styleClasses = colorMap[props.color || 'default']
   const handleClick = () => {
+    if (props.logout) {
+      logout()
+      if (pathname == '/home') {
+        router.refresh()
+      } else {
+        router.push('/home')
+      }
+    }
     props.action ? props.action() : () => {}
-    props.href ? router.push(props.href) : () => {}
+    if (props.href) {
+      if (props.href.startsWith('/')) {
+        router.push(props.href)
+      } else {
+        router.replace(props.href)
+      }
+    }
   }
   return (
     <Button
@@ -44,7 +63,7 @@ export default function CustomButton(props: Props) {
       type={props.submit ? 'submit' : 'button'}
       disabled={props.inactive == false}
       onClick={() => handleClick()}
-      className={`cursor-pointer rounded-3xl flex items-center  justify-center w-full text-primary ${styleClasses} hover:shadow-[0_0_15px_5px_rgba(59,130,246,0.4)] ${props.css}`}
+      className={`cursor-pointer lg:rounded-xl flex items-center  justify-center w-full text-blueDark ${styleClasses}  ${props.css}`}
     >
       {props.label && <div>{props.label}</div>}
       {props.icon && (

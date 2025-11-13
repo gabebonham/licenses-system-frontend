@@ -20,10 +20,7 @@ export default async function UsersLayout({
   }
   return (
     <main>
-      <div className=" min-h-screen">
-        <PrivateHeader />
-        {children}
-      </div>
+      <div className="  min-h-dvh h-full ">{children}</div>
     </main>
   )
 }

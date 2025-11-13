@@ -17,11 +17,10 @@ export default function ProfileSection({ user }: { user: User }) {
         user.id,
         formData.get('name')?.valueOf() as string | undefined,
         formData.get('email')?.valueOf() as string | undefined,
-        formData.get('accountNumber')?.valueOf() as number | undefined,
+        formData.get('accountNumber')?.valueOf() as string,
       )
     }
   }
-  console.log(user)
   return (
     <form action={handleEdit} className="flex justify-center pt-4 ">
       <Card className="w-2/3 lg:px-8 space-y-4 pt-8 border-white/10 text-blueLight px-4 bg-gradient-to-br to-foreground from-secondary">

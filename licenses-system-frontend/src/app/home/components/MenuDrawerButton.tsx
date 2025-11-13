@@ -7,7 +7,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { logout } from '@/lib/logout'
-import { Info, LogIn, Menu, ShoppingCart, UserRound } from 'lucide-react'
+import { Info, LogIn, Menu, ShoppingCart, Star, UserRound } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -32,21 +32,31 @@ export default function MenuDrawerButton({ token }: { token: any }) {
     {
       name: 'Sobre Nós',
       link: 'aboutSection',
-      icon: <Info className="text-blueLight" />,
+      icon: <Info className="" />,
+    },
+    {
+      name: 'Avaliações',
+      link: 'ratingsSection',
+      icon: <Star className="" />,
+    },
+    {
+      name: 'Copies',
+      link: 'copiesSection',
+      icon: <ShoppingCart className="" />,
     },
   ]
   return (
     <Drawer direction={'right'}>
       <DrawerTrigger className="cursor-pointer">
-        <Menu className="text-blueLight brightness-150 contrast-200" />
+        <Menu className="text-blueDark brightness-150 contrast-200" />
       </DrawerTrigger>
-      <DrawerContent className="z-90 border-blueLight">
+      <DrawerContent className="z-90 border-dark bg-gradient-to-br from-blueLight to-blueLight2 text-xl">
         <div className="w-full flex flex-col px-4 gap-y-8 py-8">
           {items.map((item) => (
             <Card
-            key={item.name}
+              key={item.name}
               onClick={() => handleScroll(item.link)}
-              className="cursor-pointer border-white/10 text-blueLight px-4 bg-gradient-to-br to-foreground from-secondary"
+              className="cursor-pointer border-dark text-dark px-4 "
             >
               <div className="flex items-center w-full gap-x-16">
                 {item.icon}
@@ -65,7 +75,7 @@ export default function MenuDrawerButton({ token }: { token: any }) {
                     : '/users/dashboard',
                 )
               }
-              className="cursor-pointer border-white/10 text-blueLight px-4 bg-gradient-to-br to-foreground from-secondary"
+              className="cursor-pointer border-dark text-dark px-4 bg-white"
             >
               <div className="flex items-center w-full gap-x-16">
                 <UserRound />
@@ -76,7 +86,7 @@ export default function MenuDrawerButton({ token }: { token: any }) {
           {token ? (
             <Card
               onClick={logoutHandler}
-              className="cursor-pointer border-white/10 text-blueLight px-4 bg-gradient-to-br to-foreground from-secondary"
+              className="cursor-pointer border-dark text-dark px-4 bg-white"
             >
               <div className="flex items-center w-full gap-x-16">
                 <LogIn />
@@ -86,7 +96,7 @@ export default function MenuDrawerButton({ token }: { token: any }) {
           ) : (
             <Card
               onClick={() => router.push('/login')}
-              className="cursor-pointer border-white/10 text-blueLight px-4 bg-gradient-to-br to-foreground from-secondary"
+              className="cursor-pointer border-dark text-dark px-4 bg-white"
             >
               <div className="flex items-center w-full gap-x-16">
                 <LogIn />

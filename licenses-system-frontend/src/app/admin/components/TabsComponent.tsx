@@ -9,6 +9,11 @@ import { LicensesDataTable } from '@/components/shared/LicensesDataTableComponen
 import { getLicenses } from '../actions/licences.service'
 import { SalesDataTable } from '@/components/shared/SalesDataTableComponent'
 import { getSales } from '../actions/sales.service'
+import { CopiesDataTable } from '@/components/shared/CopiesDataTableComponent'
+import { getCopies } from '../actions/copies.service'
+import PartnersGrid from './PartnersGrid'
+import { getPartners } from '../actions/partners.service'
+import CustomButton from '@/components/shared/buttons/CustomButton'
 
 export default async function TabsComponent() {
   const data = await getUsers()
@@ -16,39 +21,52 @@ export default async function TabsComponent() {
   const dataProducts = await getProducts()
   const dataLicenses = await getLicenses()
   const dataSales = await getSales()
-  console.log(dataProducts)
+  const dataCopies = await getCopies()
+  const dataPartners = await getPartners()
   return (
-    <Tabs defaultValue="users" className="w-full lg:text-2xl">
-      <TabsList className="bg-foreground text-blueLight min-w-3/5 lg:h-14 rounded-2xl">
+    <Tabs defaultValue="users" className="max-w-md lg:min-w-full lg:text-2xl">
+      <TabsList className="bg-grayLight text-dark border-1 border-dark  w-[98%] lg:w-fit lg:min-w-3/5 lg:h-14 rounded-lg">
         <TabsTrigger
-          className="lg:text-xl text-blueLight rounded-2xl cursor-pointer"
+          className="lg:text-xl w-1/6 text-xs px-0 lg:text-lg rounded-lg cursor-pointer"
           value="sales"
         >
           Vendas
         </TabsTrigger>
         <TabsTrigger
-          className="lg:text-xl text-blueLight rounded-2xl cursor-pointer"
+          className="lg:text-xl w-1/6 text-xs px-0 lg:text-lg rounded-lg cursor-pointer"
           value="users"
         >
           Usuários
         </TabsTrigger>
         <TabsTrigger
-          className="lg:text-xl text-blueLight rounded-2xl cursor-pointer"
+          className="lg:text-xl w-1/6 text-xs px-0 lg:text-lg rounded-lg cursor-pointer"
           value="bots"
         >
           Robôs
         </TabsTrigger>
         <TabsTrigger
-          className="lg:text-xl text-blueLight rounded-2xl cursor-pointer"
+          className="lg:text-xl w-1/6 text-xs px-0 lg:text-lg rounded-lg cursor-pointer"
           value="products"
         >
           Produtos
         </TabsTrigger>
         <TabsTrigger
-          className="lg:text-xl text-blueLight rounded-2xl cursor-pointer"
+          className="lg:text-xl w-1/6 text-xs px-0 lg:text-lg rounded-lg cursor-pointer"
           value="licenses"
         >
           Licenças
+        </TabsTrigger>
+        <TabsTrigger
+          className="lg:text-xl w-1/6 text-xs px-0 lg:text-lg rounded-lg cursor-pointer"
+          value="copies"
+        >
+          Copies
+        </TabsTrigger>
+        <TabsTrigger
+          className="lg:text-xl w-1/6 text-xs px-0 lg:text-lg rounded-lg cursor-pointer"
+          value="partners"
+        >
+          Parceiros
         </TabsTrigger>
       </TabsList>
       <TabsContent value="sales" className="w-full ">
@@ -70,6 +88,14 @@ export default async function TabsComponent() {
         <LicensesDataTable
           licenses={dataLicenses.success ? dataLicenses.data : []}
           users={data.success ? data.data : []}
+        />
+      </TabsContent>
+      <TabsContent value="copies" className="w-full ">
+        <CopiesDataTable copies={dataCopies.success ? dataCopies.data : []} />
+      </TabsContent>
+      <TabsContent value="partners" className="w-full ">
+        <PartnersGrid
+          partners={dataPartners.success ? dataPartners.data : []}
         />
       </TabsContent>
     </Tabs>

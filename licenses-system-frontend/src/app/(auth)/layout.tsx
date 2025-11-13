@@ -20,7 +20,9 @@ export default async function AuthLayout({
   } else {
     return (
       <main>
-        <div className=" min-h-screen">{children}</div>
+        <div className=" min-h-screen h-full  bg-gradient-to-br from-grayLight to-blueLight2 ">
+          {children}
+        </div>
       </main>
     )
   }

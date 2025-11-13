@@ -1,12 +1,11 @@
 'use server'
 
-import { User } from '@/entities/user.entity'
-import { api, apiPublic } from '@/lib/api'
+import { api } from '@/lib/api'
 
 export async function getProducts() {
   try {
-    const res = await api.get('/products').then((r) => r.data)
-    return { success: true, data: res }
+    const res = await api.get('/products')
+    return { success: res.status == 200, data: res.data }
   } catch (e) {
     return { success: false }
   }

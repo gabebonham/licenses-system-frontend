@@ -41,6 +41,7 @@ import { Expert } from '@/entities/expert.entity'
 import { deleteExpert, setFirst } from '@/app/admin/actions/experts.service'
 import CustomInput from './inputs/CustomInput'
 import { toast } from 'sonner'
+import EditBotModalButton from '@/app/admin/components/EditBotModalButton'
 
 export function getColumns(ref: any) {
   const columns: ColumnDef<Expert>[] = [
@@ -116,42 +117,28 @@ export function getColumns(ref: any) {
     },
 
     {
-      id: 'actions',
-      accessorKey: 'actions',
-      header: 'Ações',
-      enableHiding: false,
-      cell: ({ row }) => {
-        const payment = row.original
-
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0 cursor-pointer">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="size-6" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="bg-foreground text-blueLight lg:text-xl border-white/30 "
-            >
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
-              <DropdownMenuSeparator className="bg-white/30" />
-              <DropdownMenuItem
-                onClick={() => {
-                  deleteExpert(row.getValue('id'))
-
-                  toast('Atualize a paginá')
-                }}
-                className="text-red-500"
-              >
-                Excluir Robô
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )
-      },
+      accessorKey: 'delete',
+      header: 'Deletar',
+      cell: ({ row }) => (
+        <CustomButton
+          label="Deletar"
+          color="Option"
+          action={() => {
+            deleteExpert(row.getValue('id'))
+            toast('Atualize a página')
+          }}
+        />
+      ),
+    },
+    {
+      accessorKey: 'edit',
+      header: 'Editar',
+      cell: ({ row }) => (
+        <EditBotModalButton
+          btn={<CustomButton color="Option" label="Editar" />}
+          id={row.getValue('id')}
+        />
+      ),
     },
   ]
   return columns
@@ -188,7 +175,7 @@ export function BotsDataTable({ experts }: { experts: Expert[] }) {
   })
 
   return (
-    <div className="w-full text-blueLight  ">
+    <div className="w-full text-dark  ">
       <div className="flex items-center py-4 gap-x-4 justify-around">
         <Input
           placeholder="Filter nome..."
@@ -196,7 +183,7 @@ export function BotsDataTable({ experts }: { experts: Expert[] }) {
           onChange={(event) =>
             table.getColumn('name')?.setFilterValue(event.target.value)
           }
-          className="max-w-sm border-white/30 lg:text-xl lg:h-12"
+          className="max-w-sm border-dark lg:text-xl lg:h-12"
         />
         <div className="lg:block hidden">
           <CreateBotModalButton
@@ -204,7 +191,7 @@ export function BotsDataTable({ experts }: { experts: Expert[] }) {
               <CustomButton
                 label="Criar Robô"
                 css="w-fit px-12 h-12 lg:text-xl rounded-lg  "
-                color="Action"
+                color="Option"
               />
             }
           />
@@ -215,7 +202,7 @@ export function BotsDataTable({ experts }: { experts: Expert[] }) {
               <CustomButton
                 icon="Plus"
                 css="w-fit  lg:text-xl rounded-lg  "
-                color="Action"
+                color="Option"
               />
             }
           />
@@ -225,15 +212,12 @@ export function BotsDataTable({ experts }: { experts: Expert[] }) {
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
-              className="ml-auto cursor-pointer border-white/30 text-blueLight/60 lg:text-xl lg:h-12"
+              className="ml-auto cursor-pointer border-dark bg-grayLight text-dark lg:text-xl lg:h-12"
             >
               Columns <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="bg-foreground text-blueLight "
-          >
+          <DropdownMenuContent align="end" className="bg-grayLight text-dark ">
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
@@ -254,20 +238,17 @@ export function BotsDataTable({ experts }: { experts: Expert[] }) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="overflow-x-auto rounded-md border border-white/30 bg-foreground px-8 ">
+      <div className="overflow-x-auto rounded-md border border-dark bg-grayLight px-8 ">
         <Table className="min-w-full  ">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
-                className="border-white/30 text-blueLight lg:h-18"
+                className="border-dark text-dark lg:h-18"
                 key={headerGroup.id}
               >
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead
-                      key={header.id}
-                      className="text-blueLight/70 lg:text-xl"
-                    >
+                    <TableHead key={header.id} className="text-dark lg:text-xl">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -280,11 +261,11 @@ export function BotsDataTable({ experts }: { experts: Expert[] }) {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="border-white/30">
+          <TableBody className="border-dark">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                  className="border-white/30 lg:text-xl lg:h-18"
+                  className="border-dark lg:text-xl lg:h-18"
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                 >
