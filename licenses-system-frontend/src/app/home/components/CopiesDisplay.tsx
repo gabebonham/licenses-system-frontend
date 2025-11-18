@@ -98,15 +98,21 @@ export default function CopiesDisplay({
       <div className="hidden lg:grid grid-cols-3 gap-24 ">
         {copies.map((copy) => (
           <CopyCard
+            manualLink={copy.manualLink}
+            openAccountLink={copy.openAccountLink}
+            broker={copy.broker}
+            minimumCapital={copy.minimumCapital}
+            type={copy.type}
+            imageUrl={copy.imageUrl}
             link={copy.link}
             ratings={copy.ratings}
             key={copy.id}
             id={copy.id}
             userId={userId}
             caracteristics={copy.caracteristics}
-            name={copy.name}
+            title={copy.title}
             description={copy.description}
-            price={copy.price}
+            performance={copy.performance}
           />
         ))}
       </div>

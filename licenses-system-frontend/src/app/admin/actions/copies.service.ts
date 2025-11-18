@@ -23,15 +23,37 @@ export async function deleteCopy(id: string) {
   }
 }
 export async function createCopy(
-  name: string,
-  description: string,
-  link: string,
-  price: string,
-  caracteristics: string,
+  title?: string,
+  description?: string,
+  caracteristics?: string,
+  broker?: string,
+  openAccountLink?: string,
+  performance?: string,
+  minimumCapital?: string,
+  manualLink?: string,
+  link?: string,
+  type?: string,
+  image?: File,
 ) {
   try {
-    const formData = { name, description, link, price, caracteristics }
-    const res = await api.post('/copies', formData)
+    const formData = new FormData()
+    if (title !== undefined) formData.append('title', title)
+    if (description !== undefined) formData.append('description', description)
+    if (link !== undefined) formData.append('link', link)
+    if (broker !== undefined) formData.append('broker', broker)
+    if (caracteristics !== undefined)
+      formData.append('caracteristics', caracteristics)
+    if (openAccountLink !== undefined)
+      formData.append('openAccountLink', openAccountLink)
+    if (performance !== undefined) formData.append('performance', performance)
+    if (minimumCapital !== undefined)
+      formData.append('minimumCapital', minimumCapital)
+    if (manualLink !== undefined) formData.append('manualLink', manualLink)
+    if (type !== undefined) formData.append('type', type)
+    if (image !== undefined) formData.append('image', image)
+    const res = await api.post('/copies', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
     return { success: res.status == 201, data: res.data }
   } catch (e) {
     console.error('Error creating copy:', e)
@@ -40,24 +62,40 @@ export async function createCopy(
 }
 export async function patchCopy(
   id: string,
-  name?: string,
+  title?: string,
   description?: string,
-  link?: string,
-  price?: string,
   caracteristics?: string,
+  broker?: string,
+  openAccountLink?: string,
+  performance?: string,
+  minimumCapital?: string,
+  manualLink?: string,
+  link?: string,
+  type?: string,
+  image?: File,
 ) {
   try {
-    const formData = {
-      name: !!name ? name : undefined,
-      description: !!description ? description : undefined,
-      link: !!link ? link : undefined,
-      caracteristics: !!caracteristics ? caracteristics : undefined,
-      price: !!price ? parseFloat(price) : undefined,
-    }
-    const res = await api.patch('/copies/' + id, formData)
-    return { success: true, data: res.data }
+    const formData = new FormData()
+    if (title !== undefined) formData.append('title', title)
+    if (description !== undefined) formData.append('description', description)
+    if (link !== undefined) formData.append('link', link)
+    if (broker !== undefined) formData.append('broker', broker)
+    if (caracteristics !== undefined)
+      formData.append('caracteristics', caracteristics)
+    if (openAccountLink !== undefined)
+      formData.append('openAccountLink', openAccountLink)
+    if (performance !== undefined) formData.append('performance', performance)
+    if (minimumCapital !== undefined)
+      formData.append('minimumCapital', minimumCapital)
+    if (manualLink !== undefined) formData.append('manualLink', manualLink)
+    if (type !== undefined) formData.append('type', type)
+    if (image !== undefined) formData.append('image', image)
+    const res = await api.patch('/copies/' + id, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return { success: res.status == 201, data: res.data }
   } catch (e) {
-    console.error('Error patching copy:', e)
+    console.error('Error updating copy:', e)
     return { success: false }
   }
 }

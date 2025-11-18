@@ -137,7 +137,7 @@ export default function VoteProfileModalButton({
           action={() => activate(true)}
           label="Avaliar"
           color="Option"
-          css="w-full lg:py-4 lg:rounded-lg lg:px-6 lg:text-xl"
+          css="w-full lg:py-6 lg:rounded-xl lg:px-6 lg:text-xl"
         />
       </DialogTrigger>
       <DialogContent className=" h-fit  min-w-5/12 w-full p-2 lg:p-6 z-90  bg-grayLight border-dark rounded-2xl ">

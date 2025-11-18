@@ -53,7 +53,7 @@ export default function RatingCard({
           {/* <div>{props.copy.img}</div> */}
           <div className="py-3">
             <Link href={copy.link} className="text-2xl font-medium">
-              {copy.name}
+              {copy.title}
             </Link>
           </div>
         </div>

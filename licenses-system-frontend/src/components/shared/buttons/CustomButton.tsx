@@ -53,7 +53,7 @@ export default function CustomButton(props: Props) {
       if (props.href.startsWith('/')) {
         router.push(props.href)
       } else {
-        router.replace(props.href)
+        router.push(props.href)
       }
     }
   }

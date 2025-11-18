@@ -26,22 +26,34 @@ export default function EditCopyModalButton({
   const [error, setError] = useState<string | undefined>()
   const handleCreateExpert = async (formData: FormData) => {
     if (
-      !formData.has('name') ||
+      !formData.has('title') ||
       !formData.has('description') ||
+      !formData.has('caracteristics') ||
+      !formData.has('broker') ||
+      !formData.has('openAccountLink') ||
+      !formData.has('performance') ||
+      !formData.has('minimumCapital') ||
+      !formData.has('manualLink') ||
       !formData.has('link') ||
-      !formData.has('price') ||
-      !formData.has('caracteristics')
+      !formData.has('type') ||
+      !formData.has('image')
     ) {
       setError('Verifique os dados e tente novamente')
     } else {
       setError(undefined)
       await patchCopy(
         id,
-        formData.get('name')?.valueOf() as string,
+        formData.get('title')?.valueOf() as string,
         formData.get('description')?.valueOf() as string,
-        formData.get('link')?.valueOf() as string,
-        formData.get('price')?.valueOf() as string,
         formData.get('caracteristics')?.valueOf() as string,
+        formData.get('broker')?.valueOf() as string,
+        formData.get('openAccountLink')?.valueOf() as string,
+        formData.get('performance')?.valueOf() as string,
+        formData.get('minimumCapital')?.valueOf() as string,
+        formData.get('manualLink')?.valueOf() as string,
+        formData.get('link')?.valueOf() as string,
+        formData.get('type')?.valueOf() as string,
+        formData.get('image')?.valueOf() as File,
       )
       toast('Atualize a página')
     }
@@ -64,16 +76,61 @@ export default function EditCopyModalButton({
                 <div className="flex  justify-between w-full gap-x-8">
                   <div className="flex flex-col gap-y-4 xl:gap-y-6 w-full  ">
                     <p className="w-full flex justify-between">
-                      <span className="font-bold"> Nome:</span>
+                      <span className="font-bold"> Titulo:</span>
                       <span>
                         {' '}
                         <CustomInput
-                          name="name"
+                          name="title"
                           type="text"
                           css="text-dark border-dark"
                         />
                       </span>
                     </p>
+                    <p className="w-full flex justify-between">
+                      <span className="font-bold"> Link:</span>
+                      <span>
+                        {' '}
+                        <CustomInput
+                          name="link"
+                          type="text"
+                          css="text-dark border-dark"
+                        />
+                      </span>
+                    </p>
+                    <p className="w-full flex justify-between">
+                      <span className="font-bold"> Link Abertura Conta:</span>
+                      <span>
+                        {' '}
+                        <CustomInput
+                          name="openAccountLink"
+                          type="text"
+                          css="text-dark border-dark"
+                        />
+                      </span>
+                    </p>
+                    <p className="w-full flex justify-between">
+                      <span className="font-bold"> Performance:</span>
+                      <span>
+                        {' '}
+                        <CustomInput
+                          name="performance"
+                          type="text"
+                          css="text-dark border-dark"
+                        />
+                      </span>
+                    </p>
+                    <p className="w-full flex justify-between">
+                      <span className="font-bold"> Link Manual:</span>
+                      <span>
+                        {' '}
+                        <CustomInput
+                          name="manualLink"
+                          type="text"
+                          css="text-dark border-dark"
+                        />
+                      </span>
+                    </p>
+
                     <p className="w-full flex justify-between">
                       <span className="font-bold"> Description:</span>
                       <span>
@@ -85,21 +142,41 @@ export default function EditCopyModalButton({
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
-                      <span className="font-bold"> Link:</span>
+                      <span className="font-bold"> Tipo de Conta:</span>
                       <span>
                         <CustomInput
-                          name="link"
+                          name="type"
                           type="text"
                           css="text-dark border-dark"
                         />
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
-                      <span className="font-bold"> Preço:</span>
+                      <span className="font-bold"> Corretora:</span>
                       <span>
                         <CustomInput
-                          name="price"
+                          name="broker"
                           type="text"
+                          css="text-dark border-dark"
+                        />
+                      </span>
+                    </p>
+                    <p className="w-full flex justify-between">
+                      <span className="font-bold"> Capital Inicial:</span>
+                      <span>
+                        <CustomInput
+                          name="minimumCapital"
+                          type="text"
+                          css="text-dark border-dark"
+                        />
+                      </span>
+                    </p>
+                    <p className="w-full flex justify-between">
+                      <span className="font-bold"> Imagem:</span>
+                      <span>
+                        <CustomInput
+                          name="image"
+                          type="file"
                           css="text-dark border-dark"
                         />
                       </span>

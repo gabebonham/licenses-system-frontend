@@ -44,6 +44,8 @@ import { toast } from 'sonner'
 import { deleteCopy } from '@/app/admin/actions/copies.service'
 import EditCopyModalButton from '@/app/admin/components/EditCopyModalButton'
 import CreateCopyModalButton from '@/app/admin/components/CreateCopyModalButton'
+import { Copy } from '@/entities/copy.entity'
+import Link from 'next/link'
 
 export function getColumns(ref: any) {
   const columns: ColumnDef<Expert>[] = [
@@ -53,8 +55,8 @@ export function getColumns(ref: any) {
       cell: ({ row }) => <div className=" ">{row.getValue('id')}</div>,
     },
     {
-      accessorKey: 'name',
-      header: 'Nome',
+      accessorKey: 'title',
+      header: 'Título',
       cell: ({ row }) => (
         <div className="capitalize ">{row.getValue('name')}</div>
       ),
@@ -74,14 +76,65 @@ export function getColumns(ref: any) {
       ),
     },
     {
-      accessorKey: 'price',
-      header: 'Preço',
-      cell: ({ row }) => <div className=" ">{row.getValue('price')}</div>,
+      accessorKey: 'broker',
+      header: 'Corretora',
+      cell: ({ row }) => <div className=" ">{row.getValue('broker')}</div>,
     },
     {
       accessorKey: 'link',
       header: 'Link',
-      cell: ({ row }) => <div className=" ">{row.getValue('link')}</div>,
+      cell: ({ row }) => (
+        <Link href={row.getValue('link')} className=" ">
+          {row.getValue('link')}
+        </Link>
+      ),
+    },
+    {
+      accessorKey: 'openAccountLink',
+      header: 'Link Abertura Conta',
+      cell: ({ row }) => (
+        <Link href={row.getValue('openAccountLink')} className=" ">
+          {row.getValue('openAccountLink')}
+        </Link>
+      ),
+    },
+    {
+      accessorKey: 'performance',
+      header: 'Performance',
+      cell: ({ row }) => <div className=" ">{row.getValue('performance')}</div>,
+    },
+    {
+      accessorKey: 'minimumCapital',
+      header: 'Capital Inicial',
+      cell: ({ row }) => (
+        <div className=" ">{row.getValue('minimumCapital')}</div>
+      ),
+    },
+    {
+      accessorKey: 'manualLink',
+      header: 'Link Manual',
+      cell: ({ row }) => (
+        <Link href={row.getValue('manualLink')} className=" ">
+          {row.getValue('manualLink')}
+        </Link>
+      ),
+    },
+    {
+      accessorKey: 'type',
+      header: 'Tipo de conta',
+      cell: ({ row }) => <div className=" ">{row.getValue('type')}</div>,
+    },
+    {
+      accessorKey: 'imageUrl',
+      header: 'Imagem',
+      cell: ({ row }) => (
+        <Link
+          href={`http://localhost:5005${row.getValue('imageUrl')}`}
+          className=" "
+        >
+          {row.getValue('imageUrl')}
+        </Link>
+      ),
     },
     {
       accessorKey: 'delete',

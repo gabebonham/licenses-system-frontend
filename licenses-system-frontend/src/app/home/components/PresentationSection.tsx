@@ -49,12 +49,14 @@ export default function PresentationSection({
         </div>
       </div>
       <div className="w-full  flex justify-center xl:max-w-3/5 md:w-fit xl:w-full lg:px-0 ">
-        <GraphsCarousel
-          setCurrentExpertId={setCurrentExpertId}
-          currentExpertId={currentExpertId}
-          experts={experts}
-          trades={trades}
-        />
+        {experts && experts.length > 0 && (
+          <GraphsCarousel
+            setCurrentExpertId={setCurrentExpertId}
+            currentExpertId={currentExpertId}
+            experts={experts}
+            trades={trades}
+          />
+        )}
       </div>
     </div>
   )
