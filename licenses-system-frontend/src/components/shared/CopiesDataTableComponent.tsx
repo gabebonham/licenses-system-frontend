@@ -21,9 +21,6 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
@@ -46,7 +43,55 @@ import EditCopyModalButton from '@/app/admin/components/EditCopyModalButton'
 import CreateCopyModalButton from '@/app/admin/components/CreateCopyModalButton'
 import { Copy } from '@/entities/copy.entity'
 import Link from 'next/link'
+import { api } from '@/lib/api'
+import { apiClient } from '@/lib/api-client'
 
+export default function AutomatedFileUpload({
+  id,
+  manualLink,
+}: {
+  id: string
+  manualLink: string
+}) {
+  const fileInputRef = React.useRef<HTMLInputElement>(null)
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    const formData = new FormData()
+    formData.append('fileContent', file)
+
+    const response = await apiClient.patch(
+      `/copies/${id}/fileContent`,
+      formData,
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      },
+    )
+
+    console.log('Uploaded', response.data)
+  }
+
+  return (
+    <>
+      <CustomButton
+        label={manualLink ? 'Atualizar arquivo' : 'Enviar arquivo'}
+        action={() => fileInputRef.current?.click()}
+        color="Action"
+        css="w-fit"
+      />
+
+      <input
+        hidden
+        ref={fileInputRef}
+        type="file"
+        name="fileContent"
+        onChange={handleFileUpload}
+      />
+    </>
+  )
+}
 export function getColumns(ref: any) {
   const columns: ColumnDef<Expert>[] = [
     {
@@ -121,18 +166,6 @@ export function getColumns(ref: any) {
       cell: ({ row }) => <div className=" ">{row.getValue('type')}</div>,
     },
     {
-      accessorKey: 'imageUrl',
-      header: 'Imagem',
-      cell: ({ row }) => (
-        <Link
-          href={`http://localhost:5005${row.getValue('imageUrl')}`}
-          className=" "
-        >
-          {row.getValue('imageUrl')}
-        </Link>
-      ),
-    },
-    {
       accessorKey: 'archive',
       header: 'Arquivo',
       cell: ({ row }) => (
@@ -144,7 +177,7 @@ export function getColumns(ref: any) {
               : 'Nenhum Arquivo...'
           }
           inputId={row.getValue('id')}
-          name="fileContent"
+          name="archive"
           css="bg-transparent hover:bg-transparent  text-white w-fit p-0"
         />
       ),

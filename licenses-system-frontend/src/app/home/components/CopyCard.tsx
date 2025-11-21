@@ -9,6 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { copyFile } from 'fs'
 import { Check, Star } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 interface Props {
   id: string
   title: string
@@ -159,7 +160,7 @@ export default function CopyCard({
                 width={50}
                 height={50}
                 alt={id}
-                src={`http://localhost:5005${imageUrl}`}
+                src={`${process.env.NEXT_PUBLIC_BACKEND_URL + imageUrl}`}
               />
             )}
           </div>
@@ -193,12 +194,14 @@ export default function CopyCard({
           css="lg:text-lg py-5 lg:rounded-lg basis-1/2"
           action={handler}
         />
-        <CustomButton
-          label="Criar Conta"
-          color="Action"
-          css="lg:text-lg py-5 lg:rounded-lg basis-1/2"
-          href={openAccountLink}
-        />
+        <Link href={openAccountLink}>
+          <CustomButton
+            label="Criar Conta"
+            color="Action"
+            css="lg:text-lg py-5 lg:rounded-lg basis-1/2"
+            href={openAccountLink}
+          />
+        </Link>
         {!!userId && !hasVoted(ratings) ? (
           <VoteProfileModalButton userId={userId} copyId={id} />
         ) : (
@@ -207,12 +210,13 @@ export default function CopyCard({
             <Check />
           </p>
         )}
-        <CustomButton
-          label="Assinar Copy"
-          color="Option"
-          css="lg:text-lg py-5 lg:rounded-lg basis-1/2"
-          href={link}
-        />
+        <Link href={link}>
+          <CustomButton
+            label="Assinar Copy"
+            color="Option"
+            css="lg:text-lg py-5 lg:rounded-lg basis-1/2"
+          />
+        </Link>
       </div>
       <div>
         {trades && trades.length > 0 && (

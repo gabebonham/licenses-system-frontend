@@ -17,7 +17,7 @@ export async function login(formData: FormData) {
       throw new Error('Senha não preenchida')
     }
     const res = await apiPublic
-      .post('/login', { email, password })
+      .post('/login', { email: email.toLowerCase(), password })
       .then((r) => r.data)
     cookieStore.set('token', res.token)
     return { success: true, admin: res.role == 'admin' }

@@ -103,13 +103,27 @@ export async function patchCopy(
     return { success: false }
   }
 }
+
 export async function patchCopyFile(formData: FormData) {
   try {
-    const res = await api.patch('/copies/' + formData.get('id'), formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
+    const newFormData = new FormData()
+    const fileName = (formData.get('archive')?.valueOf() as File).name
+    newFormData.append(
+      'fileContent',
+      formData.get('archive')?.valueOf() as File,
+    )
+    if (fileName != 'undefined') {
+      const res = await api.patch(
+        (('/copies/' + formData.get('id')?.valueOf()) as string) +
+          '/fileContent',
+        newFormData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        },
+      )
+    }
   } catch (e) {
-    console.error('Error updating copy:', e)
+    console.error('Error creating expert:', e)
   }
 }
 export async function getPerformancesForCopies(

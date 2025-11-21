@@ -23,7 +23,12 @@ export async function register(formData: FormData) {
       throw new Error('Senhas diferentes')
     }
     const res = await apiPublic
-      .post('/register', { name, email, password, role: 'user' })
+      .post('/register', {
+        name,
+        email: email.toLowerCase(),
+        password,
+        role: 'user',
+      })
       .then((r) => r.data)
     cookieStore.set('token', res.token)
     return { success: true }

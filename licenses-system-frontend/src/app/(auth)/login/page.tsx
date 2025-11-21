@@ -34,7 +34,7 @@ export default function LoginPage() {
     }
   }
   return (
-    <section className="text-blueLight h-dvh  w-full  flex flex-col items-center  ">
+    <section className="text-blueLight h-full min-h-screen  w-full  flex flex-col items-center  ">
       <div className="min-lg:w-2/5 gap-y-6 h-full min-lg:items-center min-md:px-12 min-md:items-start w-full px-6 py-12 flex flex-col items-center min-md:w-3/6">
         <h1 className="lg:text-3xl text-2xl gap-x-4 text-blueDark flex-col justify-center font-bold flex items-center pb-3">
           <Link href={'/home'} className="flex items-center gap-x-4 ">

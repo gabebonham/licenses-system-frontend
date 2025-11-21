@@ -12,6 +12,7 @@ import { Separator } from '@radix-ui/react-menubar'
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import Link from 'next/link'
 function ExpertDesktopPannel({
   expert,
   trades,
@@ -58,14 +59,17 @@ function ExpertDesktopPannel({
           {expert.products && expert.products.length ? (
             <div className="px-4 h-7/12 flex gap-y-12 flex-col justify-center text-black/50">
               {expert.products?.map((product) => (
-                <Button className="hover:bg-blueDark hover:text-grayLight cursor-pointer rounded-lg grid grid-cols-2 w-full px-4 h-1/3 py-4 bg-grayLight place-content-between text-blueDark border-dark border-1">
+                <Link
+                  href={product.checkoutLink}
+                  className="hover:bg-blueDark hover:text-grayLight cursor-pointer rounded-lg grid grid-cols-2 w-full px-4 h-1/3 py-4 bg-grayLight place-content-between text-blueDark border-dark border-1"
+                >
                   <p className="text-xl font-medium text-start lg:text-2xl">
                     {product.name}
                   </p>
                   <p className="w-full"></p>
                   <p className="w-full"></p>
                   <p className="lg:text-2xl text-end">R${product.price},00</p>
-                </Button>
+                </Link>
               ))}
             </div>
           ) : (

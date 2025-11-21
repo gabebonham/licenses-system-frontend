@@ -9,7 +9,7 @@ export type Copy = {
   performance: number
   magicNumber: number
   minimumCapital: number
-  manualLink: string
+  manualLink?: string
   link: string
   type: string
   createdAt: Date
