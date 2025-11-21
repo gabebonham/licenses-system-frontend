@@ -111,13 +111,9 @@ export function getColumns(ref: any) {
       ),
     },
     {
-      accessorKey: 'manualLink',
-      header: 'Link Manual',
-      cell: ({ row }) => (
-        <Link href={row.getValue('manualLink')} className=" ">
-          {row.getValue('manualLink')}
-        </Link>
-      ),
+      accessorKey: 'magicNumber',
+      header: 'Número Mágico',
+      cell: ({ row }) => <div className=" ">{row.getValue('magicNumber')}</div>,
     },
     {
       accessorKey: 'type',
@@ -134,6 +130,23 @@ export function getColumns(ref: any) {
         >
           {row.getValue('imageUrl')}
         </Link>
+      ),
+    },
+    {
+      accessorKey: 'archive',
+      header: 'Arquivo',
+      cell: ({ row }) => (
+        <CustomInput
+          type="automatedFile2"
+          placeholder={
+            row.getValue('manualLink')
+              ? 'Atualizar arquivo'
+              : 'Nenhum Arquivo...'
+          }
+          inputId={row.getValue('id')}
+          name="fileContent"
+          css="bg-transparent hover:bg-transparent  text-white w-fit p-0"
+        />
       ),
     },
     {

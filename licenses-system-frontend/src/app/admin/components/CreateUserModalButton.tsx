@@ -50,7 +50,7 @@ export default function CreateUserModalButton({ btn }: { btn: any }) {
   return (
     <Dialog open={isActive} onOpenChange={activate}>
       <DialogTrigger className="w-full">{btn}</DialogTrigger>
-      <DialogContent className="bg-blueLight h-fit   min-w-5/12 lg:w-full p-2 lg:p-6 z-90   ">
+      <DialogContent className="bg-blueLight h-3/4   min-w-5/12 lg:w-full p-2 lg:p-6 z-90   ">
         <DialogTitle className="lg:text-4xl lg:w-full font-medium text-center">
           Criar Usuário
         </DialogTitle>

@@ -7,6 +7,7 @@ export type Copy = {
   broker: string
   openAccountLink: string
   performance: number
+  magicNumber: number
   minimumCapital: number
   manualLink: string
   link: string

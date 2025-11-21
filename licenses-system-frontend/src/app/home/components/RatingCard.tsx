@@ -42,7 +42,11 @@ export default function RatingCard({
           <h1 className="text-2xl font-medium border-blueDark">{userName}</h1>
           <h1 className="text-xl  flex">
             {Array.from({ length: getStarRating(rating) }).map((_, i) => (
-              <Star className={getColor(getStarRating(rating))} />
+              <Star
+                fill="currentColor"
+                fillRule="inherit"
+                className={getColor(getStarRating(rating))}
+              />
             ))}
           </h1>
         </div>

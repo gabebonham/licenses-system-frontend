@@ -56,7 +56,7 @@ export default function EditBotModalButton({
   return (
     <Dialog open={isActive} onOpenChange={activate}>
       <DialogTrigger className="w-full">{btn}</DialogTrigger>
-      <DialogContent className=" h-11/12 bg-grayLight min-w-5/12 w-full p-2 lg:p-6 z-90   ">
+      <DialogContent className=" h-3/4 bg-grayLight min-w-5/12 w-full p-2 lg:p-6 z-90   ">
         <DialogTitle className="lg:text-4xl lg:w-full font-medium text-center">
           Editar Expert
         </DialogTitle>

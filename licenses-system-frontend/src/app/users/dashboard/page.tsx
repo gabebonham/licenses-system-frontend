@@ -28,7 +28,7 @@ export default async function UsersDashboard() {
   const user = await getUserById(token!.id)
   if (!user.success) return 'asdf'
   return (
-    <div className="  md:h-dvh flex flex-col bg-gradient-to-br from-blueLight to-blueLight2/80 text-blueDark2">
+    <div className="  md:h-full min-h-screen flex flex-col bg-gradient-to-br from-blueLight to-blueLight2/80 text-blueDark2">
       <div className="lg:px-12 lg:py-12 px-4 py-6 space-y-6   w-full">
         <div className="flex sm:flex-row flex-col items-center gap-y-6 sm:gap-y-0 w-full justify-between gap-x-4">
           <h1 className="lg:text-5xl justify-center sm:justify-start flex items-center w-full sm:w-1/2 gap-x-4 text-2xl font-bold">

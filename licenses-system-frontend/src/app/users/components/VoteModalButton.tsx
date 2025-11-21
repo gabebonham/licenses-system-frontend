@@ -31,13 +31,15 @@ function VoteComponent({
     <div className="flex items-center flex gap-x-2">
       <div className="flex items-center">
         <Checkbox
-          className="size-7 border-dark p-0 m-0 flex items-center justify-center"
+          className="size-7 border-dark p-0 m-0 data-[state=checked]:bg-transparent flex items-center justify-center"
           checked={
             vote == 20 || vote == 40 || vote == 60 || vote == 80 || vote == 100
           }
           onCheckedChange={() => setVote(20)}
         >
           <Star
+            fill="currentColor"
+            fillRule="inherit"
             className={`size-6 transition-colors ${
               vote == 20 ||
               vote == 40 ||
@@ -50,11 +52,13 @@ function VoteComponent({
           />
         </Checkbox>
         <Checkbox
-          className="size-7 border-dark p-0 m-0 flex items-center justify-center"
+          className="size-7 border-dark p-0 m-0 data-[state=checked]:bg-transparent flex items-center justify-center"
           checked={vote == 40 || vote == 60 || vote == 80 || vote == 100}
           onCheckedChange={() => setVote(40)}
         >
           <Star
+            fill="currentColor"
+            fillRule="inherit"
             className={`size-6 transition-colors ${
               vote == 40 || vote == 60 || vote == 80 || vote == 100
                 ? 'text-yellow-500'
@@ -63,11 +67,13 @@ function VoteComponent({
           />
         </Checkbox>
         <Checkbox
-          className="size-7 border-dark p-0 m-0 flex items-center justify-center"
+          className="size-7 border-dark p-0 m-0  data-[state=checked]:bg-transparent flex items-center justify-center"
           checked={vote == 60 || vote == 80 || vote == 100}
           onCheckedChange={() => setVote(60)}
         >
           <Star
+            fill="currentColor"
+            fillRule="inherit"
             className={`size-6 transition-colors ${
               vote == 60 || vote == 80 || vote == 100
                 ? 'text-yellow-500'
@@ -76,22 +82,26 @@ function VoteComponent({
           />
         </Checkbox>
         <Checkbox
-          className="size-7 border-dark p-0 m-0 flex items-center justify-center"
+          className="size-7 border-dark data-[state=checked]:bg-transparent p-0 m-0 flex items-center justify-center"
           checked={vote == 80 || vote == 100}
           onCheckedChange={() => setVote(80)}
         >
           <Star
+            fill="currentColor"
+            fillRule="inherit"
             className={`size-6 transition-colors ${
               vote == 80 || vote == 100 ? 'text-yellow-500' : 'text-dark'
             }`}
           />
         </Checkbox>
         <Checkbox
-          className="size-7 border-dark p-0 m-0 flex items-center justify-center"
+          className="size-7 border-dark p-0 m-0 flex data-[state=checked]:bg-transparent items-center justify-center"
           checked={vote == 100}
           onCheckedChange={() => setVote(100)}
         >
           <Star
+            fill="currentColor"
+            fillRule="inherit"
             className={`size-6 transition-colors ${
               vote == 100 ? 'text-yellow-500' : 'text-dark'
             }`}
@@ -137,7 +147,7 @@ export default function VoteProfileModalButton({
           action={() => activate(true)}
           label="Avaliar"
           color="Option"
-          css="w-full lg:py-6 lg:rounded-xl lg:px-6 lg:text-xl"
+          css="w-full py-5 lg:rounded-lg lg:px-6 lg:text-xl"
         />
       </DialogTrigger>
       <DialogContent className=" h-fit  min-w-5/12 w-full p-2 lg:p-6 z-90  bg-grayLight border-dark rounded-2xl ">

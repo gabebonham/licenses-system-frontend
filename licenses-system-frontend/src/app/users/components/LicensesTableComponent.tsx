@@ -25,7 +25,7 @@ export function LicensesTableComponent({
   user,
 }: {
   licenses: License[]
-  user: User
+  user: User | undefined
 }) {
   const handler = async (expert: Expert) => {
     try {
@@ -85,6 +85,8 @@ export function LicensesTableComponent({
 
     return Array.from({ length: 5 }).map((_, i) => (
       <Star
+        fill="currentColor"
+        fillRule="inherit"
         key={i}
         className={`size-7 transition-colors ${
           i < ratingValue ? color : 'text-black/50'
@@ -93,7 +95,7 @@ export function LicensesTableComponent({
     ))
   }
   const hasVoted = (ratings: any[]) => {
-    return ratings.some((rating) => rating.userId == user.id)
+    return ratings.some((rating) => rating.userId == (user?.id as string))
   }
 
   return (
@@ -122,7 +124,7 @@ export function LicensesTableComponent({
                   getStars(license)
                 ) : (
                   <VoteProfileModalButton
-                    userId={user.id}
+                    userId={user?.id as string}
                     expertId={license.product?.expertId}
                   />
                 )}

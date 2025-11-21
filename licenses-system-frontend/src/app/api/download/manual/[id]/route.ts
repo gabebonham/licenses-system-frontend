@@ -13,7 +13,7 @@ export async function POST(
   const body = await request.json()
   try {
     // Fetch the binary data from another endpoint (or database, etc.)
-    const fileBuffer = await api.get(`/experts/download/${id}`, {
+    const fileBuffer = await api.get(`/copies/download/manual/${id}`, {
       responseType: 'arraybuffer', // Get the file as binary data
     })
 

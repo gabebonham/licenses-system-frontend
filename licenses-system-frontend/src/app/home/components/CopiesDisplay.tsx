@@ -6,9 +6,13 @@ import CopyCard from './CopyCard'
 export default function CopiesDisplay({
   userId,
   copies,
+  performancesCopy,
+  trades,
 }: {
   userId: string
   copies: any[]
+  performancesCopy: any[]
+  trades: any[]
 }) {
   // const copies = [
   //   {
@@ -95,9 +99,10 @@ export default function CopiesDisplay({
           aqui uma amostra das ações com maior volume em opções agora:
         </p>
       </div>
-      <div className="hidden lg:grid grid-cols-3 gap-24 ">
+      <div className="hidden lg:grid grid-cols-3 gap-12 ">
         {copies.map((copy) => (
           <CopyCard
+            trades={trades}
             manualLink={copy.manualLink}
             openAccountLink={copy.openAccountLink}
             broker={copy.broker}
@@ -113,11 +118,18 @@ export default function CopiesDisplay({
             title={copy.title}
             description={copy.description}
             performance={copy.performance}
+            performancesCopy={performancesCopy}
+            magicNumber={copy.magicNumber}
           />
         ))}
       </div>
       <div className="lg:hidden">
-        <CopiesCarousel userId={userId} copies={copies} />
+        <CopiesCarousel
+          performancesCopy={performancesCopy}
+          trades={trades}
+          userId={userId}
+          copies={copies}
+        />
       </div>
     </div>
   )

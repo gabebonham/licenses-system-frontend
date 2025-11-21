@@ -60,7 +60,7 @@ export default function EditProfileModalButton({ userId }: { userId: string }) {
           css="w-1/3 lg:py-6 lg:text-xl"
         />
       </DialogTrigger>
-      <DialogContent className=" h-fit  min-w-5/12 w-full p-2 lg:p-6 z-90  bg-grayLight border-dark rounded-2xl ">
+      <DialogContent className=" h-3/4  min-w-5/12 w-full p-2 lg:p-6 z-90  bg-grayLight border-dark rounded-2xl ">
         <DialogTitle className="lg:text-4xl lg:w-full font-medium text-center">
           Editar Perfil
         </DialogTitle>

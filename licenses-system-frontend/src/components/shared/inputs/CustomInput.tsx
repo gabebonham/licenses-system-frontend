@@ -5,7 +5,8 @@ import { Eye, EyeClosed, icons } from 'lucide-react'
 import { InputHTMLAttributes, useRef, useState } from 'react'
 import CustomButton from '../buttons/CustomButton'
 import { uploadFile } from '@/app/admin/actions/experts.service'
-type inpType = 'text' | 'password' | 'file' | 'automatedFile'
+import { patchCopy, patchCopyFile } from '@/app/admin/actions/copies.service'
+type inpType = 'text' | 'password' | 'file' | 'automatedFile' | 'automatedFile2'
 interface Props {
   placeholder?: string
   icon?: string
@@ -74,6 +75,28 @@ export default function CustomInput(props: Props) {
   if (props.type == 'automatedFile') {
     return (
       <form action={uploadFile}>
+        <CustomButton
+          label={props.placeholder}
+          action={() => fileInputRef.current?.click()}
+          color="Action"
+          submit
+          css="w-fit"
+          currentRef={btnRef}
+        />
+        <input hidden value={props.inputId} name="id" />
+        <Input
+          type={`file`}
+          className="hidden"
+          name={props.name}
+          ref={fileInputRef}
+          onChange={() => btnRef?.current?.click()}
+        />
+      </form>
+    )
+  }
+  if (props.type == 'automatedFile2') {
+    return (
+      <form action={patchCopyFile}>
         <CustomButton
           label={props.placeholder}
           action={() => fileInputRef.current?.click()}

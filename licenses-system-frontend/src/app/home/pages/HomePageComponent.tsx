@@ -14,6 +14,7 @@ export default function HomePageComponent({
   copies,
   items,
   performances,
+  performancesCopy,
 }: {
   res: { data?: any; success: boolean }
   userId: string
@@ -22,6 +23,7 @@ export default function HomePageComponent({
   copies: any[]
   items: any[]
   performances: any[]
+  performancesCopy: any[]
 }) {
   const [currentExpertId, setCurrentExpertId] = useState<string>('')
   const handleScroll = (target: string) => {
@@ -53,7 +55,12 @@ export default function HomePageComponent({
       </div>
       <div className="bg-blueDark">
         {' '}
-        <CopiesDisplay copies={copies} userId={userId} />{' '}
+        <CopiesDisplay
+          performancesCopy={performancesCopy}
+          copies={copies}
+          userId={userId}
+          trades={trades}
+        />{' '}
       </div>
       <div className="text-blueLight">
         {' '}

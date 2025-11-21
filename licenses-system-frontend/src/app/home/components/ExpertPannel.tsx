@@ -23,12 +23,12 @@ function ExpertDesktopPannel({
 }) {
   if (!expert) return 'Expert não selecionado.'
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 ">
       <p className="text-justify text-2xl  ">{expert.description}</p>
       <div className="flex content-stretch h-full">
-        <div className="h-full w-2/3">
+        <div className="h-full  w-2/3">
           <div className="flex text-2xl font-medium items-center justify-around py-8">
-            <p className="w-1/4 flex items-center justify-between">
+            <p className="w-1/3 flex items-center justify-between">
               <span>Capital Inicial:</span>
               <span>{(expert.initAmount as number).toFixed(2)}</span>
             </p>{' '}
@@ -87,9 +87,9 @@ function ExpertDesktopPannel({
         </div>
       </div>
       <div className="min-h-52 h-52">
-        <div className="flex font-medium text-2xl gap-x-36 items-stretch h-full ">
-          <div className="w-full h-fit gap-y-6 grid grid-cols-4 gap-x-24">
-            <p className="w-full  flex items-center justify-between">
+        <div className="flex font-medium text-2xl gap-x-4 items-stretch h-full ">
+          <div className="w-full h-fit gap-y-6 grid grid-cols-4 gap-x-12">
+            <p className="w-full flex items-center justify-between">
               <span>Negociações:</span>
               <span>{performance?.trades.toFixed(2)}</span>
             </p>

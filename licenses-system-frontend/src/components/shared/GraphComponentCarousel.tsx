@@ -60,7 +60,7 @@ export function generateMockTrades(count = 500): Trade[] {
   return trades
 }
 
-export default function GraphComponent({ trades, name }: Props) {
+export default function GraphComponentCarousel({ trades, name }: Props) {
   // Sort trades by time
   const sorted = [...trades].sort((a, b) => a.time - b.time)
   // Build cumulative profit
@@ -78,7 +78,7 @@ export default function GraphComponent({ trades, name }: Props) {
   return (
     <div className="w-full h-[350px] xl:h-[550px] ">
       <div className="w-full flex flex-col items-center  h-full ">
-        <ResponsiveContainer width="100%" height="90%" className={'xl:px-4'}>
+        <ResponsiveContainer width="100%" height="90%" className={'xl:px-24'}>
           <AreaChart
             data={equityData}
             className="bg-blueDark py-4 w-full rounded-2xl shadow-lg h-full shadow-black"

@@ -22,7 +22,7 @@ export default function PresentationSection({
   return (
     <div
       id="presentationSection"
-      className="w-full md:flex-row   flex flex-col items-center justify-center xl:justify-between py-12 gap-y-8 pb-8 xl:py-24 xl:px-20"
+      className="w-full md:flex-row lg:max-w-full xl:min-w-11/12  flex flex-col items-center justify-center xl:justify-center  py-12 gap-y-8 pb-8 xl:py-24 "
     >
       <div className="md:max-w-2/5 w-full  flex flex-col items-center md:items-start   w-full   xl:gap-y-8 xl:px-4 ">
         <h1 className="xl:max-w-2/5 max-w-96  text-3xl xl:text-7xl text-center md:text-start font-bold  w-full ">
@@ -37,18 +37,18 @@ export default function PresentationSection({
             action={() => router.push('/login')}
             color="Action"
             label="Começar Agora"
-            css="xl:text-xl w-fit xl:py-7 xl:px-12 "
+            css="xl:text-xl w-full xl:py-7 xl:max-w-2/5 xl:min-w-60"
             icon="ArrowRight"
           />
           <CustomButton
             action={() => handleScroll('productsSection')}
             color="Option"
             label="Ver Produtos"
-            css="xl:text-xl w-fit xl:py-7 xl:px-18 px-10 "
+            css="xl:text-xl w-full xl:py-7 xl:max-w-2/5 px-10 "
           />
         </div>
       </div>
-      <div className="w-full  flex justify-center xl:max-w-3/5 md:w-fit xl:w-full lg:px-0 ">
+      <div className="w-full  flex justify-center xl:max-w-3/5 md:w-fit xl:w-1/2 lg:px-0 ">
         {experts && experts.length > 0 && (
           <GraphsCarousel
             setCurrentExpertId={setCurrentExpertId}

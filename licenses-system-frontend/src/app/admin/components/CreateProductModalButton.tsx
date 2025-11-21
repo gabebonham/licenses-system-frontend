@@ -62,7 +62,7 @@ export default function CreateProductModalButton({ btn }: { btn: any }) {
   return (
     <Dialog open={isActive} onOpenChange={activate}>
       <DialogTrigger className="w-full">{btn}</DialogTrigger>
-      <DialogContent className=" h-fit text-dark border-dark bg-grayLight  min-w-5/12  p-2 lg:p-6 z-90   ">
+      <DialogContent className=" h-3/4 text-dark border-dark bg-grayLight  min-w-5/12  p-2 lg:p-6 z-90   ">
         <DialogTitle className="lg:text-4xl lg:w-full font-medium text-center">
           Criar Produto
         </DialogTitle>

@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/carousel'
 import { Checkbox } from '@/components/ui/checkbox'
 import Autoplay from 'embla-carousel-autoplay'
+import GraphComponentCarousel from '@/components/shared/GraphComponentCarousel'
 
 export default function GraphsCarousel({
   trades,
@@ -50,7 +51,7 @@ export default function GraphsCarousel({
     setCurrentExpertId(experts[count].id)
   }, [api])
   return (
-    <div className="xl:relative    max-w-sm w-full xl:w-full xl:max-w-full  w-full  flex flex-col items-center">
+    <div className="xl:relative max-w-sm w-full xl:w-full xl:max-w-full  w-full  flex flex-col items-center">
       <Carousel
         plugins={[plugin.current]}
         setApi={setApi}
@@ -63,7 +64,7 @@ export default function GraphsCarousel({
               key={index}
               className="w-full  cursor-pointer h-fit  "
             >
-              <GraphComponent
+              <GraphComponentCarousel
                 name={expert.name}
                 trades={trades.filter(
                   (trd) => trd.magic == expert?.magicNumber,
@@ -72,9 +73,9 @@ export default function GraphsCarousel({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="xl:block hidden cursor-pointer hover:bg-transparent left-12 top-1/2 -translate-y-1/2 h-28 bg-transparent border-0 shadow-none" />
+        <CarouselPrevious className="xl:block hidden cursor-pointer hover:bg-transparent left-12 top-1/2 -translate-y-4/5 h-28 bg-transparent border-0 shadow-none" />
 
-        <CarouselNext className="xl:block hidden cursor-pointer hover:bg-transparent right-8 top-1/2 -translate-y-1/2 h-28 bg-transparent border-0 shadow-none" />
+        <CarouselNext className="xl:block hidden cursor-pointer hover:bg-transparent right-8 top-1/2 -translate-y-4/5 h-28 bg-transparent border-0 shadow-none" />
       </Carousel>
       <div className=" items-center gap-x-4 lg:gap-x-8 flex justify-center py-5 lg:py-0 ">
         {experts.map((expert, index) => (

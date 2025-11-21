@@ -76,6 +76,8 @@ export default function SelectExpertButton({
                     length: getStarRating(countRatings(expert.ratings)),
                   }).map((_, i) => (
                     <Star
+                      fill="currentColor"
+                      fillRule="inherit"
                       className={getColor(
                         getStarRating(countRatings(expert.ratings)),
                       )}

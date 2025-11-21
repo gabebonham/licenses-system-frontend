@@ -26,6 +26,7 @@ export default function EditCopyModalButton({
   const [error, setError] = useState<string | undefined>()
   const handleCreateExpert = async (formData: FormData) => {
     if (
+      !formData.has('magicNumber') ||
       !formData.has('title') ||
       !formData.has('description') ||
       !formData.has('caracteristics') ||
@@ -33,7 +34,6 @@ export default function EditCopyModalButton({
       !formData.has('openAccountLink') ||
       !formData.has('performance') ||
       !formData.has('minimumCapital') ||
-      !formData.has('manualLink') ||
       !formData.has('link') ||
       !formData.has('type') ||
       !formData.has('image')
@@ -43,6 +43,7 @@ export default function EditCopyModalButton({
       setError(undefined)
       await patchCopy(
         id,
+        formData.get('magicNumber')?.valueOf() as string,
         formData.get('title')?.valueOf() as string,
         formData.get('description')?.valueOf() as string,
         formData.get('caracteristics')?.valueOf() as string,
@@ -50,7 +51,6 @@ export default function EditCopyModalButton({
         formData.get('openAccountLink')?.valueOf() as string,
         formData.get('performance')?.valueOf() as string,
         formData.get('minimumCapital')?.valueOf() as string,
-        formData.get('manualLink')?.valueOf() as string,
         formData.get('link')?.valueOf() as string,
         formData.get('type')?.valueOf() as string,
         formData.get('image')?.valueOf() as File,
@@ -61,7 +61,7 @@ export default function EditCopyModalButton({
   return (
     <Dialog open={isActive} onOpenChange={activate}>
       <DialogTrigger className="w-full">{btn}</DialogTrigger>
-      <DialogContent className="border-dark h-fit bg-grayLight min-w-5/12 w-full p-2 lg:p-6 z-90   ">
+      <DialogContent className="border-dark h-3/4 bg-grayLight min-w-5/12 w-full p-2 lg:p-6 z-90   ">
         <DialogTitle className="lg:text-4xl lg:w-full font-medium text-center">
           Editar Copy
         </DialogTitle>
@@ -98,6 +98,17 @@ export default function EditCopyModalButton({
                       </span>
                     </p>
                     <p className="w-full flex justify-between">
+                      <span className="font-bold"> Número Mágico:</span>
+                      <span>
+                        {' '}
+                        <CustomInput
+                          name="magicNumber"
+                          type="text"
+                          css="text-dark border-dark"
+                        />
+                      </span>
+                    </p>
+                    <p className="w-full flex justify-between">
                       <span className="font-bold"> Link Abertura Conta:</span>
                       <span>
                         {' '}
@@ -114,17 +125,6 @@ export default function EditCopyModalButton({
                         {' '}
                         <CustomInput
                           name="performance"
-                          type="text"
-                          css="text-dark border-dark"
-                        />
-                      </span>
-                    </p>
-                    <p className="w-full flex justify-between">
-                      <span className="font-bold"> Link Manual:</span>
-                      <span>
-                        {' '}
-                        <CustomInput
-                          name="manualLink"
                           type="text"
                           css="text-dark border-dark"
                         />

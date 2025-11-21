@@ -31,7 +31,7 @@ export default function InfoModalButton({
         <ScrollArea className="lg:flex-row  min-h-8/12 h-full  w-full flex flex-col items-center">
           <div className="text-blueLight  lg:flex-row h-full   lg:max-w-full w-full flex flex-col items-center justify-center lg:items-start gap-y-3">
             <GraphComponent
-              name="asdf"
+              name="Gráfico"
               trades={trades.filter(
                 (trade: any) => trade.magic == expert?.magicNumber,
               )}
