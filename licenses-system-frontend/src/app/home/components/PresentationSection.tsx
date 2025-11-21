@@ -32,7 +32,7 @@ export default function PresentationSection({
           Robôs de alta performance
         </div>
 
-        <div className="w-full md:flex-row flex-col pt-4 flex items-center gap-x-8 xl:justify-start gap-y-2 xl:gap-y-16">
+        <div className="w-full px-4 md:flex-row flex-col pt-4 flex items-center gap-x-8 xl:justify-start gap-y-2 xl:gap-y-16">
           <CustomButton
             action={() => router.push('/login')}
             color="Action"
