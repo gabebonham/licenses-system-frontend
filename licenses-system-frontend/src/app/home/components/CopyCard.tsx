@@ -194,14 +194,13 @@ export default function CopyCard({
           css="lg:text-lg py-5 lg:rounded-lg basis-1/2"
           action={handler}
         />
-        <Link href={openAccountLink}>
+        <a href={openAccountLink} target="_blank" rel="noopener noreferrer">
           <CustomButton
             label="Criar Conta"
             color="Action"
             css="lg:text-lg py-5 lg:rounded-lg basis-1/2"
-            href={openAccountLink}
           />
-        </Link>
+        </a>
         {!!userId && !hasVoted(ratings) ? (
           <VoteProfileModalButton userId={userId} copyId={id} />
         ) : (
@@ -210,13 +209,13 @@ export default function CopyCard({
             <Check />
           </p>
         )}
-        <Link href={link}>
+        <a href={link} target="_blank" rel="noopener noreferrer">
           <CustomButton
             label="Assinar Copy"
             color="Option"
             css="lg:text-lg py-5 lg:rounded-lg basis-1/2"
           />
-        </Link>
+        </a>
       </div>
       <div>
         {trades && trades.length > 0 && (

@@ -176,18 +176,30 @@ export default function CopyModalButton({
                       css="text-lg lg:py-5 basis-1/2 !rounded-md bg-transprent"
                       action={handler}
                     />
-                    <CustomButton
-                      label="Criar Conta"
-                      color="Action"
-                      css="text-lg lg:py-5 basis-1/2 !rounded-md hover:bg-transparent"
+                    <a
                       href={openAccountLink}
-                    />
-                    <CustomButton
-                      label="Assinar Copy"
-                      color="Option"
-                      css="text-lg lg:py-5 basis-1/2 !rounded-md bg-transprent"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full h-fit"
+                    >
+                      <CustomButton
+                        label="Criar Conta"
+                        color="Action"
+                        css="text-lg h-full lg:py-5 basis-1/2 !rounded-md hover:bg-transparent"
+                      />
+                    </a>
+                    <a
                       href={link}
-                    />
+                      className="w-full h-fit "
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <CustomButton
+                        label="Assinar Copy"
+                        color="Option"
+                        css="text-lg h-full lg:py-5 basis-1/2 !rounded-md bg-transprent"
+                      />
+                    </a>
                   </div>
                 </div>
                 <div className="grid text-xl grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-4 place-items-center w-full px-4 min-w-0">

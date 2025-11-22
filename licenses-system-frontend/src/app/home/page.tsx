@@ -26,10 +26,10 @@ export default async function HomePage() {
     resCopies.data,
   )
   const cookieStore = await cookies()
-
-  const token = await decodeJwt(cookieStore.get('token')?.value as string)
+  const valid = cookieStore.has('token')
   let user = { success: false, data: { id: '' } } as any
-  if (token) {
+  if (valid) {
+    const token = await decodeJwt(cookieStore.get('token')?.value as string)
     user = await getUserById(token!.id)
   }
   return (
