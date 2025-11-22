@@ -13,7 +13,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import React, { useState } from 'react'
 import CustomInput from '@/components/shared/inputs/CustomInput'
 import { toast } from 'sonner'
-import { patchCopy } from '../actions/copies.service'
+import { patchCopy, patchCopyImage } from '../actions/copies.service'
 
 export default function EditCopyModalButton({
   btn,
@@ -25,39 +25,66 @@ export default function EditCopyModalButton({
   const [isActive, activate] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>()
   const handleCreateExpert = async (formData: FormData) => {
-    if (
-      !formData.has('magicNumber') ||
-      !formData.has('title') ||
-      !formData.has('description') ||
-      !formData.has('caracteristics') ||
-      !formData.has('broker') ||
-      !formData.has('openAccountLink') ||
-      !formData.has('performance') ||
-      !formData.has('minimumCapital') ||
-      !formData.has('link') ||
-      !formData.has('type') ||
-      !formData.has('image')
-    ) {
-      setError('Verifique os dados e tente novamente')
-    } else {
-      setError(undefined)
-      await patchCopy(
-        id,
-        formData.get('magicNumber')?.valueOf() as string,
-        formData.get('title')?.valueOf() as string,
-        formData.get('description')?.valueOf() as string,
-        formData.get('caracteristics')?.valueOf() as string,
-        formData.get('broker')?.valueOf() as string,
-        formData.get('openAccountLink')?.valueOf() as string,
-        formData.get('performance')?.valueOf() as string,
-        formData.get('minimumCapital')?.valueOf() as string,
-        formData.get('link')?.valueOf() as string,
-        formData.get('type')?.valueOf() as string,
-        formData.get('image')?.valueOf() as File,
+    const image = formData.get('image') as File | null
+    const hasImage = image && image.size > 0 // valid image
+
+    const fields = [
+      'magicNumber',
+      'title',
+      'description',
+      'caracteristics',
+      'broker',
+      'openAccountLink',
+      'performance',
+      'minimumCapital',
+      'link',
+      'type',
+    ]
+
+    // Collect only fields actually filled (non-empty)
+    const body: Record<string, any> = {}
+
+    fields.forEach((f) => {
+      const value = formData.get(f)
+      if (value !== null && value !== '' && value !== undefined) {
+        body[f] = value
+      }
+    })
+
+    const hasAnyField = Object.keys(body).length > 0
+
+    // ❌ Cannot update image + other fields
+    if (hasImage && hasAnyField) {
+      setError(
+        'Imagem só pode ser alterada sozinha, sem outras características.',
       )
-      toast('Atualize a página')
+      return
     }
+
+    // 🖼 Image only
+    if (hasImage) {
+      await patchCopyImage(id, formData)
+      activate(false)
+      toast('Imagem atualizada! Atualize a página.')
+      return
+    }
+
+    // ❌ Nothing to update
+    if (!hasAnyField) {
+      setError('Nenhuma alteração enviada. Preencha ao menos um campo.')
+      return
+    }
+
+    // ✔ Patch only the filled fields
+    setError(undefined)
+
+    // Pass dynamic values
+    await patchCopy(id, body)
+
+    activate(false)
+    toast('Copy atualizada! Atualize a página.')
   }
+
   return (
     <Dialog open={isActive} onOpenChange={activate}>
       <DialogTrigger className="w-full">{btn}</DialogTrigger>

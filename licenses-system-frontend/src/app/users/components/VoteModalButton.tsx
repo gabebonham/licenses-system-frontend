@@ -115,10 +115,12 @@ export default function VoteProfileModalButton({
   userId,
   expertId,
   copyId,
+  rated,
 }: {
-  userId: string
+  userId?: string
   expertId?: string
   copyId?: string
+  rated: boolean
 }) {
   const [value, setValue] = useState<number>(0)
   const [isActive, activate] = useState<boolean>(false)
@@ -128,7 +130,7 @@ export default function VoteProfileModalButton({
       const description = formData.get('description')
       setError(undefined)
       await createRating(
-        userId,
+        userId as string,
         description?.valueOf() as string,
         value,
         expertId,
@@ -147,6 +149,7 @@ export default function VoteProfileModalButton({
           action={() => activate(true)}
           label="Avaliar"
           color="Option"
+          inactive={rated}
           css="w-full py-5 lg:rounded-lg lg:px-6 lg:text-xl"
         />
       </DialogTrigger>

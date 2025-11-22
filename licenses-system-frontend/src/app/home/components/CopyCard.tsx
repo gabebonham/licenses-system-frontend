@@ -201,13 +201,25 @@ export default function CopyCard({
             css="lg:text-lg py-5 lg:rounded-lg basis-1/2"
           />
         </a>
-        {!!userId && !hasVoted(ratings) ? (
-          <VoteProfileModalButton userId={userId} copyId={id} />
+        {!!userId ? (
+          !hasVoted(ratings) ? (
+            <VoteProfileModalButton
+              rated={!!userId && !hasVoted(ratings)}
+              userId={userId}
+              copyId={id}
+            />
+          ) : (
+            <p className="text-center text-xl flex w-full items-center justify-center ">
+              Avaliado
+              <Check />
+            </p>
+          )
         ) : (
-          <p className="text-center text-xl flex w-full items-center justify-center ">
-            Avaliado
-            <Check />
-          </p>
+          <VoteProfileModalButton
+            rated={!!userId && !hasVoted(ratings)}
+            userId={undefined}
+            copyId={id}
+          />
         )}
         <a href={link} target="_blank" rel="noopener noreferrer">
           <CustomButton

@@ -62,48 +62,34 @@ export async function createCopy(
     return { success: false }
   }
 }
-export async function patchCopy(
-  id: string,
-  magicNumber?: string,
-  title?: string,
-  description?: string,
-  caracteristics?: string,
-  broker?: string,
-  openAccountLink?: string,
-  performance?: string,
-  minimumCapital?: string,
-  link?: string,
-  type?: string,
-  image?: File,
-) {
+export async function patchCopy(id: string, body: Record<string, any>) {
   try {
-    const formData = new FormData()
-    if (magicNumber !== undefined) formData.append('magicNumber', magicNumber)
-    if (title !== undefined) formData.append('title', title)
-    if (description !== undefined) formData.append('description', description)
-    if (link !== undefined) formData.append('link', link)
-    if (broker !== undefined) formData.append('broker', broker)
-    if (caracteristics !== undefined)
-      formData.append('caracteristics', caracteristics)
-    if (openAccountLink !== undefined)
-      formData.append('openAccountLink', openAccountLink)
-    if (performance !== undefined) formData.append('performance', performance)
-    if (minimumCapital !== undefined)
-      formData.append('minimumCapital', minimumCapital)
-    if (type !== undefined) formData.append('type', type)
-    if (image instanceof File && image.size > 0) {
-      formData.append('image', image)
+    const res = await api.patch('/copies/' + id, body)
+    return {
+      success: res.status == 201 || res.status == 200 || res.status == 204,
+      data: res.data,
     }
-    const res = await api.patch('/copies/' + id, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-    return { success: res.status == 201 || res.status == 200, data: res.data }
   } catch (e) {
     console.error('Error updating copy:', e)
     return { success: false }
   }
 }
+export async function patchCopyImage(id: string, formData: FormData) {
+  try {
+    const fileRaw = formData.get('image')
 
+    console.log('Imagem recebida:', fileRaw)
+
+    const newFormData = new FormData()
+    newFormData.append('image', fileRaw as File)
+
+    await api.patch(`/copies/${id}/image`, newFormData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+  } catch (e) {
+    console.error('Error creating expert:', e)
+  }
+}
 export async function patchCopyFile(formData: FormData) {
   try {
     const newFormData = new FormData()

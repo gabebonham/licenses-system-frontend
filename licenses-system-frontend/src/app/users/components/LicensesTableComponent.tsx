@@ -124,6 +124,7 @@ export function LicensesTableComponent({
                   getStars(license)
                 ) : (
                   <VoteProfileModalButton
+                    rated={hasVoted(license.product?.expert?.ratings || [])}
                     userId={user?.id as string}
                     expertId={license.product?.expertId}
                   />
