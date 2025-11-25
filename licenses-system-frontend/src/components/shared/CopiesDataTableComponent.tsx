@@ -103,7 +103,7 @@ export function getColumns(ref: any) {
       accessorKey: 'title',
       header: 'Título',
       cell: ({ row }) => (
-        <div className="capitalize ">{row.getValue('name')}</div>
+        <div className="capitalize ">{row.getValue('title')}</div>
       ),
     },
     {
@@ -173,8 +173,8 @@ export function getColumns(ref: any) {
           type="automatedFile2"
           placeholder={
             row.getValue('manualLink')
-              ? 'Atualizar arquivo'
-              : 'Nenhum Arquivo...'
+              ? 'Atualizar Manual'
+              : 'Nenhum Manual do Copy...'
           }
           inputId={row.getValue('id')}
           name="archive"
